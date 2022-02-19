@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Kanit&family=Mukta:wght@500&family=Roboto+Mono&family=Shizuru&display=swap');
+
+
 .App {
   text-align: center;
 }
@@ -38,4 +41,13 @@
 }
 body{
   /* background-color: #111; */
+  font-family: 'Arial'  ;
+}
+.slick-arrow.slick-next{
+  /* display: none !important; */
+  right: 20px !important;
+}
+.slick-arrow.slick-prev{
+  left: 20px !important;
+  z-index: 3 !important;
 }

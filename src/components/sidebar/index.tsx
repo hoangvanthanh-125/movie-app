@@ -15,7 +15,7 @@ function Sidebar() {
   };
   return (
     <div
-      className={`md:hidden fixed top-0 left-[-200px] bottom-0 w-[200px] bg-mainBackGround z-[2] ${
+      className={`md:hidden fixed top-0 left-[-200px] bottom-0 w-[200px] bg-mainBackGround z-[11] ${
         openSidebar ? "translate-x-full" : "translate-x-0"
       } transition-all overflow-auto`}
     >

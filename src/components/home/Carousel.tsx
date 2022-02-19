@@ -26,22 +26,30 @@ function Carousel() {
   return (
     <div className="px-[0px] bg-mainBackGround  ">
       <Slider {...settings}>
-        {dataFilm.map((item: any, index: number) => (
-          <div
-            className="relative before:absolute before:inset-0 before:bg-overlayColor "
-            key={index}
-          >
-            <img
-              className="w-full  h-auto"
-              alt=""
-              src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path!}`}
-            />
-            <div className="absolute  top-[50px] left-[50px] text-[14px] text-mainTextColor font-bold md:text-[36px] md:top-[150px] md:left-[150px]">
-              <h1>{item.original_title}</h1>
-              <h2 className="text-[12px] md:text-[27px] bg-gradient-to-r from-indigo-500 py-[10px] pl-[10px] pr-[100px] ">{item.title}</h2>
+        {dataFilm
+          .filter((item: any) => item?.overview)
+          ?.map((item: any, index: number) => (
+            <div
+              className="relative before:absolute before:inset-0 before:bg-overlayColor "
+              key={index}
+            >
+              <img
+                className="w-full  h-auto"
+                alt=""
+                src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path!}`}
+              />
+              <div className="absolute top-[50px] left-[50px] text-[14px] text-mainTextColor font-bold md:text-[36px] md:top-[150px] md:left-[150px] max-w-[500px]">
+                <h1>{item.original_title}</h1>
+                <span className="mt-[10px] text-[12px] md:text-[27px] inline-block bg-gradient-to-r from-indigo-500 py-[10px] pl-[10px] pr-[40px] md:pr-[70px] ">
+                  {item.title}
+                </span>
+                <p className=" pr-[40px] text-[10px] font-normal sm:text-[13px] mt-[10px] md:text-[14px] w-full text-gray-300">
+                  {item.overview?.substr(0, 130)}
+                  {item?.overview?.length > 130 && <span>...</span>}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </Slider>
     </div>
   );
