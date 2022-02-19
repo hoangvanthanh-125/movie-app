@@ -9,15 +9,7 @@ import MenuItem from "./MenuItem";
 
 function Sidebar() {
   const { openSidebar } = useAppSelector((state) => state.ui);
-  const [open, setOpen] = useState(false);
-  const [icon, setIcon] = useState("+");
   const dispatch = useAppDispatch();
-  const handleClickIcon = (e:React.MouseEvent<HTMLSpanElement>) => {
-    console.log(e.target);
-    
-    setOpen(!open);
-    open ? setIcon("+") : setIcon("-");
-  };
   const handleOnclickIconSidebar = () => {
     dispatch(uiActions.toggleSidebar());
   };
@@ -35,7 +27,7 @@ function Sidebar() {
         />
       </div>
       {listHeader.map((item) => (
-        <MenuItem item={item} />
+        <MenuItem key={item.name} item={item} />
       ))}
     </div>
   );

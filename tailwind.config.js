@@ -14,7 +14,7 @@ module.exports = {
         hoverColor:'#3dc6c6',
         mainTextColor:'#e5e5e5',
         mainBackGround:"#111",
-        overlayColor:'rgba(0,0,0,0.5)'
+        overlayColor:'rgba(2, 13, 24, 0.7)'
       },
       keyframes: {
         wiggle: {

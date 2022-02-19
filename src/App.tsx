@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Header from './components/header';
-import { useAppSelector } from './redux/hook';
-import { Collapse } from "react-collapse";
-import Sidebar from './components/sidebar';
+import Home from './components/home';
 import Overlay from './components/overlay';
+import Sidebar from './components/sidebar';
 
 
 function App() {
-  const [open,setOpen] = useState(false);
-
-  
   return (
    <>
    <Header />
+   <Home />
    <Sidebar />
    <Overlay />
  {/* <div>

@@ -17,7 +17,7 @@ function Header() {
     dispatch(uiActions.toggleSidebar());
   };
   return (
-    <div className="h-[60px] w-full max-w-full bg-mainBackGround box-border text-mainTextColor flex justify-between items-center p-[10px] px-[50px] fixed top-0 left-0 right-0">
+    <div className="h-[60px] w-full max-w-full bg-mainBackGround box-border text-mainTextColor flex justify-between items-center p-[10px] px-[50px] fixed top-0 left-0 right-0 z-10">
       <FontAwesomeIcon
         onClick={() => clickIconSideBar()}
         icon={faList}
@@ -28,7 +28,7 @@ function Header() {
         {listHeader.map((item) => (
           <li
             key={item.name}
-            className="cursor-pointer md:hover:text-hoverColor relative group inline-block transition-all"
+            className="cursor-pointer md:hover:text-indigo-500 relative group inline-block transition-all"
           >
             <span> {item.name}</span>
             {item.dropdown && (
@@ -42,7 +42,7 @@ function Header() {
                 {item.listOption?.map((item, index) => (
                   <span
                     key={index}
-                    className="ml-[20px] text-mainBackGround font-semibold hover:text-hoverColor transition-all"
+                    className="ml-[20px] text-mainBackGround font-semibold hover:text-indigo-500 transition-all"
                   >
                     {item}
                   </span>
