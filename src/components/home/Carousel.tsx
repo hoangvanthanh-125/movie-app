@@ -44,7 +44,7 @@ function Carousel() {
                   {item.title}
                 </span>
                 <p className=" pr-[40px] text-[10px] font-normal sm:text-[13px] mt-[10px] md:text-[14px] w-full text-gray-300">
-                  {item.overview?.substr(0, 130)}
+                  {item.overview?.split(" ")?.slice(0,40).join(" ")}
                   {item?.overview?.length > 130 && <span>...</span>}
                 </p>
               </div>
