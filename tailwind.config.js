@@ -49,13 +49,22 @@ module.exports = {
           '100%':{
             transform:'translateX(100%)'
           }
-        }
+        },
+        marginHeader:{
+          '0%':{
+             marginTop:'60px'
+          },
+          '100%':{
+            marginTop:'130px'          }
+        },
       },
       animation: {
         wiggle: 'wiggle 0.25s ease-in',
         fadeIn:'fadeIn 0.25s ease-in',
         fadeOut:'fadeOut 0.25s ease-in',
-        translateIn:'translateIn 0.25s ease-in'
+        translateIn:'translateIn 0.25s ease-in',
+        marginHeader:'marginHeader 0.25s ease-in'
+        
     }
     },
   },

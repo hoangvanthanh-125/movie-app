@@ -2,13 +2,13 @@ import { faCaretDown, faList, faSearch } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { listHeader } from "../../constants";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { uiActions } from "../../redux/slice/uiSlice";
 import FormSearch from "./FormSearch";
 
 function Header() {
   const dispatch = useAppDispatch();
-  const [openSearch,setOpenSearch] = useState(false);
+  const {openSearch} = useAppSelector(state => state.ui)
   const clickIconSideBar = () => {
     dispatch(uiActions.toggleSidebar());
   };
@@ -52,12 +52,12 @@ function Header() {
           ))}
         </ul>
         <FontAwesomeIcon
-          onClick={() => setOpenSearch(!openSearch)}
+          onClick={() => dispatch(uiActions.toggleSearch())}
           icon={faSearch}
           className="px-[7px] py-[5px] bg-gray-700 cursor-pointer rounded-sm"
         />
       </div>
-      <div className={`bg-mainBackGround  p-[20px] h-[80px] ${!openSearch?'translate-y-[-100px]' : 'translate-y-0'} transition-all flex justify-center items-center`}>
+      <div className={`bg-mainBackGround  p-[20px] h-[80px] box-border ${!openSearch?'translate-y-[-100px] delay-100' : 'translate-y-0'} transition-all flex justify-center items-center`}>
         <FormSearch openSearch = {openSearch} />
       </div>
     </div>

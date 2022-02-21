@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface UI {
-  openSidebar:boolean
+  openSidebar:boolean,
+  openSearch:boolean
 }
 const initialState = {
-  openSidebar:false
+  openSidebar:false,
+  openSearch:false
 } as UI
 
 const uiSlice = createSlice({
@@ -12,6 +14,9 @@ const uiSlice = createSlice({
   reducers:{
   toggleSidebar:(state) => {
     state.openSidebar = !state.openSidebar
+  },
+  toggleSearch:(state) => {
+    state.openSearch = !state.openSearch
   }
   }
 
