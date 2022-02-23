@@ -40,7 +40,7 @@
   }
 }
 body{
-  /* background-color: #111; */
+  background-color: rgb(31, 29, 29);
   font-family: 'Arial'  ;
 }
 .slick-arrow.slick-next{
