@@ -57,9 +57,13 @@ function Header() {
           className="px-[7px] py-[5px] bg-gray-700 cursor-pointer rounded-sm"
         />
       </div>
-      <div className={`bg-mainBackGround  p-[20px] h-[80px] box-border ${!openSearch?'translate-y-[-100px] delay-100' : 'translate-y-0'} transition-all flex justify-center items-center`}>
+      {/* <div className={`bg-mainBackGround  p-[20px] h-[80px] box-border ${!openSearch?'-translate-y-[200px] delay-100' : 'translate-y-0'} transition-all flex justify-center items-center`}>
+        <FormSearch openSearch = {openSearch} />
+      </div> */}
+      <div className={`bg-mainBackGround fixed left-0 right-0 top-[-300px] p-[20px] h-[80px] box-border ${openSearch?'top-[60px] ' : 'top-0'} transition-all flex justify-center items-center`}>
         <FormSearch openSearch = {openSearch} />
       </div>
+      
     </div>
   );
 }

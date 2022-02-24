@@ -1,8 +1,8 @@
- interface Data{
+ export interface DataFilter{
    id:string | number,
    name:string
  }
- const countryData:Data[] = [
+ const countryData:DataFilter[] = [
   {
     id: "en",
     name: "Âu mỹ",
@@ -80,7 +80,7 @@
     name: "Mexico",
   },
 ];
-let listYear : Data[] = [];
+let listYear : DataFilter[] = [];
 const date = new Date();
   const getCurrentYear = date.getFullYear();
   for (let i = 1990; i < getCurrentYear; ++i) {
@@ -89,7 +89,7 @@ const date = new Date();
       name:i.toString()
     });
   }
-const geners = [
+const genres = [
   {
   id:  28 ,
    name:  " Hành động "
@@ -166,5 +166,5 @@ const geners = [
   export {
     countryData,
     listYear,
-    geners
+    genres
   };

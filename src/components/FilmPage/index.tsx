@@ -47,7 +47,7 @@ function FilmPage() {
   };
   return (
     <div>
-      {/* <FilterFilm handleChangeGenre={handleChangeGenre} handleChangeYear={handleChangeYear} handChangeCountry={handChangeCountry} handleSort={handleSort}  /> */}
+      <FilterFilm handleChangeGenre={handleChangeGenre} handleChangeYear={handleChangeYear} handChangeCountry={handChangeCountry} handleSort={handleSort}  />
       <ListFilm  listFilm = {listFilm}/>
       <Pagination totalPage={totalPage} handlePageChange={handlePageChange} currentPage={filters.page} />
     </div>

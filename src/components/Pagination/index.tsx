@@ -1,12 +1,8 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCaretDown,
-  faList,
-  faSearch,
-  faAngleRight,
-  faAngleLeft,
+  faAngleLeft, faAngleRight
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 
 interface Props {
   totalPage: number;

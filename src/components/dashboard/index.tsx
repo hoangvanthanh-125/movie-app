@@ -12,7 +12,7 @@ function DashBoard(props : Props) {
     <div>
       <Header />
       <Overlay />
-      <div className={`${!openSearch ? 'mt-[60px]' : 'mt-[140px] delay-100' } transition-all `}>
+      <div className={`${!openSearch ? 'mt-[60px]' : 'mt-[140px] delay-0' } transition-all `}>
         {props.children}
       </div>
     </div>
