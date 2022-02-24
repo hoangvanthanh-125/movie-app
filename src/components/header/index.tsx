@@ -24,12 +24,12 @@ function Header() {
           Film24h
         </div>
         <ul className=" hidden md:flex w-[768px] justify-between items-center">
-          {listHeader.map((item) => (
+          {listHeader.map((item,index) => (
             <li
-              key={item.name}
-              className="cursor-pointer md:hover:text-indigo-500 relative group inline-block transition-all"
+              key={index}
+              className="cursor-pointer md:hover:text-indigo-500 relative group inline-block transition-all "
             >
-              <span> {item.name}</span>
+              <span className="font-medium"> {item.name}</span>
               {item.dropdown && (
                 <FontAwesomeIcon
                   icon={faCaretDown}
@@ -37,14 +37,14 @@ function Header() {
                 />
               )}
               {item.dropdown && (
-                <div className="min-w-[400px] min-h-[100px] box-border p-[20px] bg-gray-700 absolute bottom-[-110px]  right-[-30px] hidden group-hover:flex animate-wiggle transition-all rounded group-hover:flex-wrap justify-start items-center before:absolute  before:top-[-30px] before:right-[10px] before:w-0 before:h-0  before:border-x-[20px] before:border-x-transparent before:border-y-[20px] before:border-t-transparent before:border-b-gray-700 after:absolute after:inset-0 after:bg-red-500 after:h-[20px] after:top-[-17px] after:opacity-0 ">
-                  {item.listOption?.map((item, index) => (
-                    <span
+                <div className="min-w-[400px] min-h-[100px] box-border p-[20px] bg-gray-700 absolute top-[33px] right-[-30px] hidden group-hover:flex animate-wiggle transition-all rounded group-hover:flex-wrap justify-start items-center before:absolute  before:top-[-30px] before:right-[30px] before:w-0 before:h-0  before:border-x-[20px] before:border-x-transparent before:border-y-[20px] before:border-t-transparent before:border-b-gray-700 after:absolute after:inset-0 after:bg-red-500 after:h-[20px] after:top-[-17px] after:opacity-0 ">
+                  {item?.listOption?.map((item, index) => (
+                    <p
                       key={index}
-                      className="ml-[20px] text-mainTextColor font-semibold hover:text-indigo-500 transition-all"
+                      className="ml-[20px] text-mainTextColor  hover:text-indigo-500 transition-all w-[100px] text-left "
                     >
-                      {item}
-                    </span>
+                      {item?.name}
+                    </p>
                   ))}
                 </div>
               )}

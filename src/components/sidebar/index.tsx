@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { Collapse } from "react-collapse";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { listHeader } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { uiActions } from "../../redux/slice/uiSlice";
 import MenuItem from "./MenuItem";
 
@@ -15,8 +14,8 @@ function Sidebar() {
   };
   return (
     <div
-      className={`md:hidden fixed top-0 left-[-200px] bottom-0 w-[200px] bg-mainBackGround z-[11] ${
-        openSidebar ? "translate-x-full" : "translate-x-0"
+      className={`md:hidden fixed inset-0 w-full bg-mainBackGround z-[11] ${
+        !openSidebar ? "-translate-x-full" : "translate-x-0"
       } transition-all overflow-auto`}
     >
       <div className="text-mainTextColor px-[10px] py-[10px] flex justify-between items-center  border-b-[1px]">
@@ -26,7 +25,7 @@ function Sidebar() {
           icon={faArrowLeft}
         />
       </div>
-      {listHeader.map((item) => (
+      {listHeader.map((item,index) => (
         <MenuItem key={item.name} item={item} />
       ))}
     </div>

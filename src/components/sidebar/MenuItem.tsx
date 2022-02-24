@@ -23,13 +23,13 @@ function MenuItem({ item }: Props) {
       </div>
       {item.dropdown && (
         <Collapse isOpened={open}>
-          <div>
-            {item.listOption?.map((item: any) => (
+          <div className="flex justify-start items-center flex-wrap p-[10px]">
+            {item.listOption?.map((item: any,index:number) => (
               <div
                 className="text-mainTextColor text-sm ml-[10px] py-[5px]"
-                key={item}
+                key={index}
               >
-                {item}
+                {item?.name}
               </div>
             ))}
           </div>
