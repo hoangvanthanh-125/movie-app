@@ -16,7 +16,7 @@ function FilmPage() {
     sortBy: "popularity.desc",
     country: "en",
   });
-  const [totalPage,setTotalPage] = useState();
+  const [totalPage,setTotalPage] = useState<number>(0);
   const [listFilm,setListFilm] = useState();
   useEffect(() => {
     const fetchFilm = async() => {
@@ -39,7 +39,7 @@ function FilmPage() {
   const handChangeCountry = (value:string) => {
     setFilters({ ...filters, page: 1, country: value });
   };
-  const handlePageChange = (pageNumber:string) => {
+  const handlePageChange = (pageNumber:number) => {
     setFilters({ ...filters, page: Number(pageNumber) });
   };
   const handleSort = (value:string) => {
@@ -49,7 +49,7 @@ function FilmPage() {
     <div>
       {/* <FilterFilm handleChangeGenre={handleChangeGenre} handleChangeYear={handleChangeYear} handChangeCountry={handChangeCountry} handleSort={handleSort}  /> */}
       <ListFilm  listFilm = {listFilm}/>
-      {/* <Pagination totalPage={totalPage} handlePageChange={handlePageChange} /> */}
+      <Pagination totalPage={totalPage} handlePageChange={handlePageChange} currentPage={filters.page} />
     </div>
   );
 }
