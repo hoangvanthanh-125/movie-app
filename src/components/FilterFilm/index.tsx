@@ -1,32 +1,30 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { countryData, DataFilter, genres, listYear } from "../data/filterData";
+import { Filter } from "../FilmPage";
 type FormData = {
-  geners: string;
+  genre: string;
   country: string;
   year: string;
   sortBy: string;
 };
 interface Props {
-  handleChangeGenre: (value: string) => void;
-  handleChangeYear: (value: string) => void;
-  handleSort: (value: string) => void;
-  handChangeCountry: (value: string) => void;
+  handleFilter: (filter: Filter) => void;
 }
 
-function FilterFilm({
-  handleChangeGenre,
-  handleChangeYear,
-  handleSort,
-  handChangeCountry,
-}: Props) {
+function FilterFilm({ handleFilter }: Props) {
   const { register, handleSubmit } = useForm<FormData>();
   const onSubmit = handleSubmit((data) => {
-    const { country, geners, sortBy, year } = data;
-    handChangeCountry(country);
-    handleChangeGenre(geners);
-    handleChangeYear(year);
-    handleSort(sortBy);
+    console.log("data" + data);
+
+    const { country, genre, sortBy, year } = data;
+    handleFilter({
+      country,
+      genre,
+      page: 1,
+      sortBy,
+      year,
+    });
   });
 
   return (
@@ -35,7 +33,7 @@ function FilterFilm({
       className="flex items-center justify-center flex-wrap pt-[30px] pb-[20px] "
     >
       <select
-        {...register("geners")}
+        {...register("genre")}
         className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400"
       >
         <option value="">Thể loại</option>
