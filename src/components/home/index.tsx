@@ -3,7 +3,7 @@ import Carousel from './Carousel';
 
 function Home() {
   return (
-    <div className='mt-[60px]'>
+    <div className=''>
       <Carousel />
     </div>
   );

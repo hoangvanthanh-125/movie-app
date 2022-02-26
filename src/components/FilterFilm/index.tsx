@@ -30,11 +30,11 @@ function FilterFilm({ handleFilter }: Props) {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex items-center justify-center flex-wrap pt-[30px] pb-[20px] "
+      className="flex items-center justify-start flex-wrap  pb-[20px] "
     >
       <select
         {...register("genre")}
-        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400"
+        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400 basis-1/6"
       >
         <option value="">Thể loại</option>
         {genres.map((item: DataFilter, index) => (
@@ -44,7 +44,7 @@ function FilterFilm({ handleFilter }: Props) {
         ))}
       </select>
       <select
-        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400"
+        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400 basis-1/6"
         {...register("country")}
       >
         <option value="">Quốc gia</option>
@@ -55,7 +55,7 @@ function FilterFilm({ handleFilter }: Props) {
         ))}
       </select>
       <select
-        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400"
+        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400 basis-1/6"
         {...register("year")}
       >
         <option value="">Năm phát hành</option>
@@ -66,7 +66,7 @@ function FilterFilm({ handleFilter }: Props) {
         ))}
       </select>
       <select
-        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400"
+        className="bg-gray-700 p-[5px] rounded-sm mr-[10px] text-mainTextColor mt-[10px] font-semibold text-[13px] border border-indigo-400 basis-1/6"
         {...register("sortBy")}
       >
         <option value="">Sắp xếp theo</option>

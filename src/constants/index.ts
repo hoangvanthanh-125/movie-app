@@ -1,8 +1,13 @@
-import { countryData, genres, listYear } from "../components/data/filterData";
+import { countryData, DataFilter, genres, listYear } from "../components/data/filterData";
 
 export const API_KEY = '0ef54b8f9731f4b0b783ef7276c3800f';
 export const ORIGIN_PATH = 'https://image.tmdb.org/t/p/w500'
-export const listHeader = [
+export interface HeaderItem {
+  name:string,
+  dropdown:boolean,
+  listOption?:DataFilter[],
+}
+export const listHeader:HeaderItem[] = [
   {
     name:"Phim lẻ",
     dropdown:false
@@ -26,10 +31,10 @@ export const listHeader = [
     dropdown:true,
     listOption:listYear
   },
-  {
-    name:"Phim chiếu rạp",
-    dropdown:false
-  },
+  // {
+  //   name:"Phim chiếu rạp",
+  //   dropdown:false
+  // },
   {
     name:"Trailer",
     dropdown:false

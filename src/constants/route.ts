@@ -12,7 +12,7 @@ export const USER_ROUTER :USER_ROUTE[] = [
     component:Home
   },
   {
-      path:'/list/:type',
+      path:'/:option/:type',
       name:'Page-Film',
       component:FilmPage
   }
