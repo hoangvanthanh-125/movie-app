@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Collapse } from "react-collapse";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { HeaderItem } from "../../constants";
 import { useAppDispatch } from "../../redux/hook";
 import { uiActions } from "../../redux/slice/uiSlice";
@@ -14,6 +14,7 @@ function MenuItem({ item }: Props) {
   const [icon, setIcon] = useState("+");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
 
   const handleClickIcon = (e: React.MouseEvent<HTMLSpanElement>) => {
     console.log(e.target);
@@ -47,7 +48,13 @@ function MenuItem({ item }: Props) {
       key={item.name}
     >
       <div className="flex justify-between items-center px-[10px] py-[10px] text-mainTextColor">
-        <span className="font-semibold">{item.name}</span>
+        <span
+          className={`font-medium ${
+            pathname === item?.path ? "text-indigo-500" : ""
+          } font-semibold`}
+        >
+          {item.name}
+        </span>
         {item.dropdown && (
           <span
             className=" w-[30px] inline-block h-full text-right"

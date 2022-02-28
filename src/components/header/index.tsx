@@ -5,7 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { HeaderItem, listHeader } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { uiActions } from "../../redux/slice/uiSlice";
@@ -15,6 +15,7 @@ import FormSearch from "./FormSearch";
 function Header() {
   const dispatch = useAppDispatch();
   const { openSearch } = useAppSelector((state) => state.ui);
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const clickIconSideBar = () => {
     dispatch(uiActions.toggleSidebar());
@@ -56,7 +57,14 @@ function Header() {
               key={index}
               className="cursor-pointer md:hover:text-indigo-500 relative group inline-block transition-all "
             >
-              <span className="font-medium"> {item.name}</span>
+              <span
+                className={`font-medium ${
+                  pathname === item?.path ? "text-indigo-500" : ""
+                }`}
+              >
+                {" "}
+                {item.name}
+              </span>
               {item.dropdown && (
                 <FontAwesomeIcon
                   icon={faCaretDown}

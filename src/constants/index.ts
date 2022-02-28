@@ -6,15 +6,18 @@ export interface HeaderItem {
   name:string,
   dropdown:boolean,
   listOption?:DataFilter[],
+  path?:string
 }
 export const listHeader:HeaderItem[] = [
   {
     name:"Phim lẻ",
-    dropdown:false
+    dropdown:false,
+    path:'/list/movie'
   },
   {
     name:"Phim bộ",
-    dropdown:false
+    dropdown:false,
+    path:'/list/tv'
   },
   {
     name:"Thể loại",
