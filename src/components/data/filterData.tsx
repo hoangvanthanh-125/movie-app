@@ -100,7 +100,7 @@ const genres = [
   } ,
   {
   id:  16 ,
-  name:  " Hoạt ảnh "
+  name:  " Hoạt hình "
   } ,
   {
   id:  35 ,

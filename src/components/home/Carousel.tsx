@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
-
-function Carousel() {
-  const [dataFilm, setDataFilm] = useState<any>([1]);
-  console.log(dataFilm);
-
+function Carousel({dataFilm}:any) {
   var settings = {
     infinite: true,
     speed: 500,
@@ -16,15 +11,8 @@ function Carousel() {
     autoplay: true,
     autoplaySpeed: 3000,
   };
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/discover/movie?api_key=0ef54b8f9731f4b0b783ef7276c3800f&language=vi&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&page=1"
-      )
-      .then((res) => setDataFilm(res.data.results));
-  }, []);
   return (
-    <div className="px-[0px] bg-mainBackGround  ">
+    <div className="mt-[-30px]">
       <Slider {...settings}>
         {dataFilm
           .filter((item: any) => item?.overview)
@@ -34,7 +22,7 @@ function Carousel() {
               key={index}
             >
               <img
-                className="w-full  h-auto"
+                className="w-full  h-auto  object-fill"
                 alt=""
                 src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path!}`}
               />
