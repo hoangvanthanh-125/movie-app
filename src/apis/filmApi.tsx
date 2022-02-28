@@ -46,4 +46,6 @@ export const getHomeData = () =>
     axios.get(
       "https://api.themoviedb.org/3/discover/movie?api_key=0ef54b8f9731f4b0b783ef7276c3800f&language=vi&with_genres=16&page=1"
     ),
+    axios.get("https://api.themoviedb.org/3/trending/movie/day?api_key=0ef54b8f9731f4b0b783ef7276c3800f"),
+    axios.get("https://api.themoviedb.org/3/trending/tv/day?api_key=0ef54b8f9731f4b0b783ef7276c3800f")
   ]);

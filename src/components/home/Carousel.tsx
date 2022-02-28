@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-function Carousel({dataFilm}:any) {
+function Carousel({filmOnCarousel}:any) {
   var settings = {
     infinite: true,
     speed: 500,
@@ -11,11 +10,12 @@ function Carousel({dataFilm}:any) {
     autoplay: true,
     autoplaySpeed: 3000,
   };
+  
   return (
     <div className="mt-[-30px]">
       <Slider {...settings}>
-        {dataFilm
-          .filter((item: any) => item?.overview)
+        {filmOnCarousel
+          ?.filter((item: any) => item?.overview)
           ?.map((item: any, index: number) => (
             <div
               className="relative before:absolute before:inset-0 before:bg-overlayColor "

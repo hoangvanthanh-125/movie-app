@@ -68,7 +68,10 @@ function FilmPage() {
         {title}
       </h1>
       <FilterFilm handleFilter={handleFilter} />
-      <ListFilm listFilm={listFilm} />
+      <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px]">
+        <ListFilm listFilm={listFilm} />
+      </div>
+
       <Pagination
         totalPage={totalPage}
         handlePageChange={handlePageChange}
