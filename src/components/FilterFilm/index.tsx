@@ -15,8 +15,6 @@ interface Props {
 function FilterFilm({ handleFilter }: Props) {
   const { register, handleSubmit } = useForm<FormData>();
   const onSubmit = handleSubmit((data) => {
-    console.log("data" + data);
-
     const { country, genre, sortBy, year } = data;
     handleFilter({
       country,

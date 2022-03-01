@@ -1,8 +1,6 @@
-import {
-  faAngleLeft, faAngleRight
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   totalPage: number;
@@ -11,6 +9,9 @@ interface Props {
 }
 function Pagination({ totalPage, handlePageChange, currentPage }: Props) {
   const pageArr = [];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
   for (let i = 1; i <= totalPage; i++) {
     pageArr.push(i);
   }
@@ -19,15 +20,15 @@ function Pagination({ totalPage, handlePageChange, currentPage }: Props) {
       handlePageChange(num);
     }
   };
-  const handleChangepage = (num:number) => {
-  if(num + currentPage > 0 && num + currentPage <= totalPage){
-    handlePageChange(currentPage + num);
-  }
-  }
+  const handleChangepage = (num: number) => {
+    if (num + currentPage > 0 && num + currentPage <= totalPage) {
+      handlePageChange(currentPage + num);
+    }
+  };
   return (
     <div className="flex items-center justify-center mb-[10px]">
       <FontAwesomeIcon
-      onClick={() => handleChangepage(-1)}
+        onClick={() => handleChangepage(-1)}
         icon={faAngleLeft}
         className=" px-[5px] w-[20px] h-[20px] py-[5px] bg-gray-700 cursor-pointer rounded-sm text-mainTextColor mr-[5px]"
       />

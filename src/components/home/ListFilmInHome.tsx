@@ -30,7 +30,7 @@ function ListFilmInHome({ listFilm, listTrending, path, title }: Props) {
           </div>
         </div>
         <div className=" col-span-12 md:col-span-4 ">
-          <div className="p-[30px] bg-gradient-to-b from-indigo-500 mt-[30px] box-border rounded-t-2xl mb-[5px] ">
+          <div className="p-[30px] bg-gradient-to-b from-indigo-500  box-border rounded-t-2xl mb-[5px] ">
             <h1 className="text-2xl text-mainTextColor font-semibold ">
               Top {title.toLowerCase()} thịnh hành
             </h1>

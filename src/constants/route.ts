@@ -1,5 +1,6 @@
 import FilmPage from "../components/FilmPage";
 import Home from "../components/home";
+import SearchPage from "../components/searchPage";
 export interface USER_ROUTE{
   name:string,
   path:string,
@@ -15,5 +16,10 @@ export const USER_ROUTER :USER_ROUTE[] = [
       path:'/:option/:type',
       name:'Page-Film',
       component:FilmPage
+  },
+  {
+    path:'/search/:query',
+    name:'SearchPage',
+    component:SearchPage
   }
 ]

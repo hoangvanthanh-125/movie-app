@@ -49,3 +49,5 @@ export const getHomeData = () =>
     axios.get("https://api.themoviedb.org/3/trending/movie/day?api_key=0ef54b8f9731f4b0b783ef7276c3800f"),
     axios.get("https://api.themoviedb.org/3/trending/tv/day?api_key=0ef54b8f9731f4b0b783ef7276c3800f")
   ]);
+
+  export const fetchListSearch = (query:string,page:number) => axiosClient.get(`search/multi?api_key=${API_KEY}&language=vi&page=${page}&include_adult=false&query=${query}`)
