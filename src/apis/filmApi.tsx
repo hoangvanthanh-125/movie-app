@@ -51,3 +51,7 @@ export const getHomeData = () =>
   ]);
 
   export const fetchListSearch = (query:string,page:number) => axiosClient.get(`search/multi?api_key=${API_KEY}&language=vi&page=${page}&include_adult=false&query=${query}`)
+
+  export const fetchFilmDetail = (type:string,id:string) => axiosClient.get(`/${type}/${id}?api_key=${API_KEY}&language=vi`);
+
+  export const getActor = (type:string,id:string) => axiosClient.get(`/${type}/${id}/credits?api_key=${API_KEY}&language=vi`);

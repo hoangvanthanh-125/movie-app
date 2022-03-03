@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getListFilm } from "../../apis/filmApi";
 import { findTitileFilmPage } from "../../helper/findTitleFilmPage";
-import { countryData, DataFilter, genres } from "../data/filterData";
 import FilterFilm from "../FilterFilm";
 import ListFilm from "../ListFilm";
 import Pagination from "../Pagination";
@@ -53,7 +52,7 @@ function FilmPage() {
   };
   return (
     <div className="px-[20px] md:px-[50px] rounded-sm ">
-      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px]">
+      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
         <div
           onClick={() => navigate("/")}
           className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"

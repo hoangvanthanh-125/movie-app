@@ -13,7 +13,7 @@ function Carousel({filmOnCarousel}:any) {
   
   return (
     <div className="mt-[-30px]">
-      <Slider {...settings}>
+      <Slider {...settings} className='carousel'>
         {filmOnCarousel
           ?.filter((item: any) => item?.overview)
           ?.map((item: any, index: number) => (

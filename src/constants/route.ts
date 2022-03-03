@@ -1,3 +1,4 @@
+import FilmDetail from "../components/filmDetail";
 import FilmPage from "../components/FilmPage";
 import Home from "../components/home";
 import SearchPage from "../components/searchPage";
@@ -21,5 +22,10 @@ export const USER_ROUTER :USER_ROUTE[] = [
     path:'/search/:query',
     name:'SearchPage',
     component:SearchPage
+  },
+  {
+    path:':type/:id/:name',
+    name:'FilmDetail',
+    component:FilmDetail
   }
 ]

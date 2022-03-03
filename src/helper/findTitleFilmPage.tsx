@@ -12,9 +12,10 @@ export const findTitileFilmPage = (type: string, option: string) => {
     title = "Phim " + genres.find((item: DataFilter) => item.id == type)?.name;
   } else if (option === "country") {
     title =
-      "Phim " + countryData.find((item: DataFilter) => item.id === type)?.name;
+      "Phim " + (countryData.find((item: DataFilter) => item.id === type)?.name || '');
   } else if (option === "year") {
     title = "Phim " + type;
   }
-  return title;
+  
+  return title || '';
 };

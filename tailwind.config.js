@@ -13,9 +13,11 @@ module.exports = {
       colors:{
         hoverColor:'#3dc6c6',
         mainTextColor:'#e5e5e5',
+        secondTextColor:'#8E95A5',
         mainBackGround:"#111",
         overlayColor:'rgba(2, 13, 24, 0.7)',
-        colorMenu:'rgb(31, 29, 29)'
+        colorMenu:'rgb(31, 29, 29)',
+        colorFacebook:'#3b5999'
       },
       keyframes: {
         wiggle: {
