@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
-import { fetchDataHome } from "../../redux/actions/filmDataActions";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import ListFilm from "../ListFilm";
 import Carousel from "./Carousel";
@@ -12,11 +11,6 @@ function Home() {
   const { filmOnCarousel, popularMovie, popularTv, anime,movieTrending,tvTrending } = useAppSelector(
     (state) => state.filmData
   );
-  console.log(filmOnCarousel);
-
-  useEffect(() => {
-    dispatch(fetchDataHome());
-  }, []);
   return (
     <div className="">
       <Carousel filmOnCarousel={filmOnCarousel} />

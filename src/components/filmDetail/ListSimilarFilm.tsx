@@ -19,7 +19,7 @@ function ListSimilarFilm({ type, id }: Props) {
     <div>
       <h1 className="text-2xl text-indigo-500 font-semibold">Phim tương tự</h1>
       <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px]">
-        <ListFilm listFilm={listFilm} />
+        <ListFilm listFilm={listFilm?.slice(0,12)} />
       </div>
     </div>
   );

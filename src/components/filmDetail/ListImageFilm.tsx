@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
-import axiosClient from '../../apis/axiosClient';
-import { API_KEY } from '../../constants';
-var settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  responsive: [
-    {
-      breakpoint: 433,
-      settings: {
-        slidesToShow: 3,
-        infinite: false,
-        dots: false,
-      },
-    },
-  ],
-};
+import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
+import axiosClient from "../../apis/axiosClient";
+import { API_KEY } from "../../constants";
+
 interface Props {
   type: string;
   id: string;
 }
 
-function ListImageFilm({id,type}:Props) {
-  const [listImage,setListImage] = useState<any>([]);
-  console.log(listImage);
-  
+function ListImageFilm({ id, type }: Props) {
+  const [listImage, setListImage] = useState<any>([]);
+  const countImage = listImage?.length;
+  var settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 433,
+        settings: {
+          slidesToShow: countImage > 3 ? 3 : countImage,
+          infinite: false,
+          dots: false,
+        },
+      },
+    ],
+  };
   useEffect(() => {
-  axiosClient.get(`/${type}/${id}/images?api_key=${API_KEY}`).then((res) => {
-    if(res.status === 200){
-      setListImage(res?.data.backdrops);
-    }
-  })
-  },[id,type])
+    axiosClient.get(`/${type}/${id}/images?api_key=${API_KEY}`).then((res) => {
+      if (res.status === 200) {
+        setListImage(res?.data.backdrops);
+      }
+    });
+  }, [id, type]);
   return (
-    <div>
-       <Slider {...settings} className="actor">
+    <div className="p-5">
+      <Slider {...settings} className="">
         {listImage?.length > 0 &&
           listImage?.map((item: any, index: number) => {
             if (item?.file_path !== null) {

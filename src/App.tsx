@@ -4,8 +4,14 @@ import "./App.css";
 import DashBoard from "./components/dashboard";
 import Sidebar from "./components/sidebar";
 import { USER_ROUTE, USER_ROUTER } from "./constants/route";
+import { fetchDataHome } from "./redux/actions/filmDataActions";
+import { useAppDispatch } from "./redux/hook";
 
 function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchDataHome());
+  }, []);
   const renderUserRoute = () => {
     let result = null;
     if (USER_ROUTER.length > 0) {

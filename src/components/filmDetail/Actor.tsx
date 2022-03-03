@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { getActor } from "../../apis/filmApi";
-import { ORIGIN_PATH } from "../../constants";
 interface Props {
   type: string;
   id: string;
@@ -9,15 +8,41 @@ interface Props {
 var settings = {
   infinite: true,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 6,
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
   responsive: [
     {
-      breakpoint: 433,
+      breakpoint: 1057,
       settings: {
-        slidesToShow: 3,
+        slidesToShow: 5,
+        infinite: false,
+        dots: false,
+        initialSlide: 2
+
+      },
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 6,
+        infinite: false,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 474,
+      settings: {
+        slidesToShow: 5,
+        infinite: false,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 402,
+      settings: {
+        slidesToShow: 4,
         infinite: false,
         dots: false,
       },
@@ -27,6 +52,7 @@ var settings = {
 function Actor({ type, id }: Props) {
   const [listActor, setListActor] = useState<any>([]);
   useEffect(() => {
+    window.scrollTo(0,0);
     getActor(type, id).then((res) => {
       if (res.status === 200) {
         setListActor(res?.data?.cast);
@@ -35,7 +61,7 @@ function Actor({ type, id }: Props) {
     });
   }, [type, id]);
   return (
-    <div className="w-full max-w-full md:w-[600px] mt-[10px] p-[20px] py-[0]  ">
+    <div className=" mt-[10px] p-[20px] py-[0]  ">
       <Slider {...settings} className="actor">
         {listActor?.length > 0 &&
           listActor?.map((item: any, index: number) => {

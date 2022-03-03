@@ -11,6 +11,7 @@ import Actor from "./Actor";
 import ListImageFilm from "./ListImageFilm";
 import ListKeyword from "./ListKeyword";
 import ListSimilarFilm from "./ListSimilarFilm";
+import Trailer from "./Trailer";
 
 function FilmDetail() {
   const { id, name, type } = useParams();
@@ -135,14 +136,21 @@ function FilmDetail() {
                   Thời lượng : <span className="text-indigo-500">{time}</span>
                 </p>
               </div>
-
-              <div className="text-secondTextColor">
-                <h1 className="mt-[10px]">Diễn viên :</h1>
-                <Actor type={type!} id={id!} />
-              </div>
             </div>
           </div>
 
+          <div className="text-secondTextColor mt-[30px]">
+            <p className=" text-xl font-semibold text-indigo-500 mb-[20px]">
+              Diễn viên
+            </p>
+            <Actor type={type!} id={id!} />
+          </div>
+          <div className="mt-[30px]">
+            <p className=" text-xl font-semibold text-indigo-500 mb-[20px]">
+              Trailer
+            </p>
+            <Trailer type={type!} id={id!} />
+          </div>
           <div>
             <h1 className="text-indigo-500 text-2xl font-semibold mt-[30px]">
               Nội dung phim {film?.name || film?.title}
@@ -150,6 +158,7 @@ function FilmDetail() {
             <p className="mt-[10px] text-secondTextColor">{film?.overview}</p>
             <ListImageFilm type={type!} id={id!} />
           </div>
+
           <div>
             <ListKeyword type={type!} id={id!} />
           </div>
@@ -157,21 +166,21 @@ function FilmDetail() {
         <div className=" col-span-12 md:col-span-4  ">
           <div>
             <div className="p-[30px] bg-gradient-to-b from-indigo-500  box-border rounded-t-2xl mb-[5px] ">
-              <h1 className="text-2xl text-mainTextColor font-semibold ">
+              <h1 className="text-xl text-mainTextColor font-semibold ">
                 Top phim lẻ thịnh hành
               </h1>
             </div>
-            <div className="scroll h-[600px] md:h-[400px] overflow-y-auto">
+            <div className="scroll h-[600px] md:h-[450px] overflow-y-auto">
               <ListFilm listFilm={movieTrending} isTrending={true} />
             </div>
           </div>
           <div className="mt-[20px]">
-            <div className="p-[30px] bg-gradient-to-b from-indigo-500  box-border rounded-t-2xl mb-[5px] ">
-              <h1 className="text-2xl text-mainTextColor font-semibold ">
+            <div className="p-[30px] bg-gradient-to-b from-indigo-500  box-border rounded-t-2xl ] ">
+              <h1 className="text-xl text-mainTextColor font-semibold ">
                 Top phim bộ thịnh hành
               </h1>
             </div>
-            <div className="scroll h-[600px] md:h-[380px] overflow-y-auto">
+            <div className="scroll h-[600px] md:h-[450px] overflow-y-auto">
               <ListFilm listFilm={tvTrending} isTrending={true} />
             </div>
           </div>

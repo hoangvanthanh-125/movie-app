@@ -55,3 +55,5 @@ export const getHomeData = () =>
   export const fetchFilmDetail = (type:string,id:string) => axiosClient.get(`/${type}/${id}?api_key=${API_KEY}&language=vi`);
 
   export const getActor = (type:string,id:string) => axiosClient.get(`/${type}/${id}/credits?api_key=${API_KEY}&language=vi`);
+
+  export const getTrailer = (type:string,id:string) => axios.get(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}`);

@@ -1,11 +1,10 @@
 import React from 'react';
-import { useAppDispatch } from '../../redux/hook';
-import { uiActions } from '../../redux/slice/uiSlice';
+import { useAppSelector } from '../../redux/hook';
 
 function Overlay() {
-  const dispatch = useAppDispatch();
+  const {openOverlay} = useAppSelector(state => state.ui)
   return (
-    <div onClick={() => dispatch(uiActions.toggleSidebar())} className={`fixed inset-0 bg-overlayColor z-[11] hidden `}>
+    <div  className={`fixed inset-0 bg-overlayColor z-[10] ${openOverlay ? 'block' : 'hidden'} `}>
       
     </div>
   );

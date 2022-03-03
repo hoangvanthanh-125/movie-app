@@ -6,14 +6,15 @@ interface Props{
   children:any
 }
 
-function DashBoard(props : Props) {
+function DashBoard({children} : Props) {
   const {openSearch} = useAppSelector(state => state.ui);
+  
   return (
     <div>
       <Header />
       <Overlay />
       <div className={`${!openSearch ? 'mt-[30px]' : 'mt-[140px] delay-0' } transition-all pt-[30px] `}>
-        {props.children}
+        {children}
       </div>
     </div>
   );
