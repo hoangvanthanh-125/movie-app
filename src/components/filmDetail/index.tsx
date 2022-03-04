@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { fetchFilmDetail } from "../../apis/filmApi";
+import { getDetailFilmData } from "../../apis/filmApi";
 import { ORIGIN_PATH } from "../../constants";
 import { useAppSelector } from "../../redux/hook";
 import ListFilm from "../ListFilm";
@@ -12,10 +12,17 @@ import ListImageFilm from "./ListImageFilm";
 import ListKeyword from "./ListKeyword";
 import ListSimilarFilm from "./ListSimilarFilm";
 import Trailer from "./Trailer";
-
-function FilmDetail() {
+interface Props {
+  atWatchPage: boolean;
+}
+function FilmDetail({ atWatchPage }: Props) {
   const { id, name, type } = useParams();
   const [film, setfilm] = useState<any>();
+  const [listActor, setListActor] = useState<any>([]);
+  const [listImage, setListImage] = useState<any>([]);
+  const [listTrailer, setListTrailer] = useState<any>([]);
+  const [listKeyWord, setListKeyWord] = useState<any>([]);
+
   const navigate = useNavigate();
   const { movieTrending, tvTrending } = useAppSelector(
     (state) => state.filmData
@@ -28,14 +35,18 @@ function FilmDetail() {
 
   useEffect(() => {
     if (type && id) {
-      fetchFilmDetail(type!, id!).then((res) => {
-        setfilm(res?.data);
+      getDetailFilmData(type, id).then((res) => {
+        setfilm(res[0].data);
+        setListActor(res[1]?.data?.cast);
+        setListImage(res[2]?.data?.backdrops);
+        setListTrailer(res[3]?.data?.results);
+        setListKeyWord(res[4].data?.keywords);
       });
     }
   }, [id, name, type]);
+
   const renderInfo = (list: any, path: string) => {
     if (film) {
-      // const { genres } = film!;
       let result = null;
       if (list && list?.length > 0) {
         result = list?.map((item: any, index: number) => (
@@ -54,18 +65,19 @@ function FilmDetail() {
   };
   return (
     <div className="px-[20px] md:px-[50px]">
-      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
-        <div
-          onClick={() => navigate("/")}
-          className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
-        >
-          <FontAwesomeIcon icon={faHome} className="text-[14px]" />
-          <span className="ml-[5px]">Trang chủ</span>
+      {!atWatchPage && (
+        <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
+          <div
+            onClick={() => navigate("/")}
+            className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
+          >
+            <FontAwesomeIcon icon={faHome} className="text-[14px]" />
+            <span className="ml-[5px]">Trang chủ</span>
+          </div>
+          <span className="mx-[5px]">/</span>
+          <span>{film?.name || film?.title}</span>
         </div>
-        <span className="mx-[5px]">/</span>
-        <span>{film?.name || film?.title}</span>
-      </div>
-
+      )}
       <div className="grid grid-cols-12 mt-[30px] gap-7">
         <div className="md:col-span-8 col-span-12">
           <div className=" flex flex-col md:flex-row md:justify-start md:items-start ">
@@ -75,7 +87,12 @@ function FilmDetail() {
                 src={`${ORIGIN_PATH}${film?.poster_path}`}
                 alt=""
               />
-              <div className="p-[4px] rounded-sm  text-mainTextColor  font-semibold text-[13px] border border-indigo-400 bg-indigo-500 hover:bg-indigo-700 transition-all w-[100px] flex justify-center items-center cursor-pointer mt-[10px] ">
+              <div
+                className="p-[4px] rounded-sm  text-mainTextColor  font-semibold text-[13px] border border-indigo-400 bg-indigo-500 hover:bg-indigo-700 transition-all w-[100px] flex justify-center items-center cursor-pointer mt-[10px] "
+                onClick={() =>
+                  navigate(`/watch/${type}/${id}/${name?.replaceAll(" ", "-")}`)
+                }
+              >
                 <FontAwesomeIcon
                   icon={faPlay}
                   className="text-[14px] mr-[5px]"
@@ -143,24 +160,24 @@ function FilmDetail() {
             <p className=" text-xl font-semibold text-indigo-500 mb-[20px]">
               Diễn viên
             </p>
-            <Actor type={type!} id={id!} />
+            <Actor listActor={listActor} type={type!} id={id!} />
           </div>
           <div className="mt-[30px]">
             <p className=" text-xl font-semibold text-indigo-500 mb-[20px]">
               Trailer
             </p>
-            <Trailer type={type!} id={id!} />
+            <Trailer listTrailer={listTrailer} type={type!} id={id!} />
           </div>
           <div>
             <h1 className="text-indigo-500 text-2xl font-semibold mt-[30px]">
               Nội dung phim {film?.name || film?.title}
             </h1>
             <p className="mt-[10px] text-secondTextColor">{film?.overview}</p>
-            <ListImageFilm type={type!} id={id!} />
+            <ListImageFilm listImage={listImage} type={type!} id={id!} />
           </div>
 
           <div>
-            <ListKeyword type={type!} id={id!} />
+            <ListKeyword listKeyWordFlim={listKeyWord} type={type!} id={id!} />
           </div>
         </div>
         <div className=" col-span-12 md:col-span-4  ">

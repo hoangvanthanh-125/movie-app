@@ -55,5 +55,20 @@ export const getHomeData = () =>
   export const fetchFilmDetail = (type:string,id:string) => axiosClient.get(`/${type}/${id}?api_key=${API_KEY}&language=vi`);
 
   export const getActor = (type:string,id:string) => axiosClient.get(`/${type}/${id}/credits?api_key=${API_KEY}&language=vi`);
+  export const getListKeyWord = (type:string,id:string) =>  axiosClient.get(`/${type}/${id}/keywords?api_key=${API_KEY}`)
 
   export const getTrailer = (type:string,id:string) => axios.get(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}`);
+ export const getListImage = (type:string,id:string) => axiosClient.get(`/${type}/${id}/images?api_key=${API_KEY}`)
+  export const getDetailFilmData = (type:string,id:string) =>  Promise.all([
+    fetchFilmDetail(type,id),
+    getActor(type,id),
+    getListImage(type,id),
+    getTrailer(type,id),
+    getListKeyWord(type,id)
+  ])
+
+export const getDetailActor = (id:string) => Promise.all([
+  axiosClient.get(`/person/${id}?api_key=${API_KEY}&languagevi`),
+  axiosClient.get(`/person/${id}/movie_credits?api_key=${API_KEY}&languagevi`),
+  axiosClient.get(`/person/${id}/tv_credits?api_key=${API_KEY}&languagevi`)
+])

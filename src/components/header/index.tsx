@@ -38,7 +38,7 @@ function Header() {
   };
   return (
     <div className="fixed top-0 left-0 right-0 z-10 mb-[0px] text-[16px]">
-      <div className="h-[60px] w-full max-w-full bg-mainBackGround box-border text-mainTextColor flex justify-between items-center p-[10px] px-[20px] md:px-[50px] relative z-10 ">
+      <div className="h-[60px] w-full max-w-full bg-mainBackGround  box-border text-mainTextColor flex justify-between items-center p-[10px] px-[20px] md:px-[50px] relative z-10 ">
         <FontAwesomeIcon
           onClick={() => clickIconSideBar()}
           icon={faList}

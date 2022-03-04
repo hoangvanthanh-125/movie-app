@@ -6,12 +6,12 @@ import { uiActions } from "../../redux/slice/uiSlice";
 import VideoTrailer from "./VideoTrailer";
 interface Props {
   type: string;
-  id: string;
+  id: string,
+  listTrailer:any
 }
 
-function Trailer({ type, id }: Props) {
+function Trailer({ type, id,listTrailer }: Props) {
   
-  const [listTrailer, setlistTrailer] = useState<any>([]);
   const [videoKey, setVideokey] = useState("");
   const videoCount = listTrailer?.length;
 
@@ -67,13 +67,6 @@ function Trailer({ type, id }: Props) {
   };
   const dispatch = useAppDispatch();
   
-  useEffect(() => {
-    getTrailer(type, id).then((res) => {
-      if (res.status === 200) {
-        setlistTrailer(res?.data?.results);
-      }
-    });
-  }, [type, id]);
   const closeVideo = () => {
     setVideokey("");
   };

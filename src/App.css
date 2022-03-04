@@ -40,7 +40,8 @@
   }
 }
 body{
-  background-color: rgb(31, 29, 29);
+  /* background-color: rgb(31, 29, 29); */
+  background-color: #111;
   font-family: 'Arial'  ;
   font-size: 14px;
 }
@@ -94,5 +95,8 @@ body{
   justify-content: center !important;
   align-items: center !important;
 
+}
+.header{
+  box-shadow: 0 14px 27px #16181e;
 }
 

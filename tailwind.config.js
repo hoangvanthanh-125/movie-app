@@ -17,7 +17,8 @@ module.exports = {
         mainBackGround:"#111",
         overlayColor:'rgba(2, 13, 24, 0.7)',
         colorMenu:'rgb(31, 29, 29)',
-        colorFacebook:'#3b5999'
+        colorFacebook:'#3b5999',
+        secondBg:'#343946'
       },
       keyframes: {
         wiggle: {

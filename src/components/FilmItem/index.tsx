@@ -18,7 +18,7 @@ function FilmItem({ film, isTrending }: Props) {
       <img
         className={`${
           isTrending === true
-            ? "w-[120px] h-auto mr-[20px]"
+            ? "w-[60px] h-auto mr-[20px]"
             : "w-full h-[270px] "
         }  object-cover rounded-sm`}
         src={`${ORIGIN_PATH}${film.poster_path}`}

@@ -1,5 +1,4 @@
 import React from "react";
-import { idText } from "typescript";
 import { useAppDispatch } from "../../redux/hook";
 import { uiActions } from "../../redux/slice/uiSlice";
 interface Props {

@@ -1,7 +1,9 @@
+import ActorDetail from "../components/actorDetail";
 import FilmDetail from "../components/filmDetail";
 import FilmPage from "../components/FilmPage";
 import Home from "../components/home";
 import SearchPage from "../components/searchPage";
+import WatchPage from "../components/watchPage";
 export interface USER_ROUTE{
   name:string,
   path:string,
@@ -27,5 +29,15 @@ export const USER_ROUTER :USER_ROUTE[] = [
     path:':type/:id/:name',
     name:'FilmDetail',
     component:FilmDetail
+  },
+  {
+    path:'watch/:type/:id/:name',
+    name:'FilmDetail',
+    component:WatchPage
+  },
+  {
+    path:'actor/:id/:name',
+    name:'Actor',
+    component:ActorDetail
   }
 ]

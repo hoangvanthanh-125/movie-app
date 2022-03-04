@@ -5,11 +5,11 @@ import { API_KEY } from "../../constants";
 
 interface Props {
   type: string;
-  id: string;
+  id: string,
+  listImage:any
 }
 
-function ListImageFilm({ id, type }: Props) {
-  const [listImage, setListImage] = useState<any>([]);
+function ListImageFilm({ id, type,listImage }: Props) {
   const countImage = listImage?.length;
   var settings = {
     infinite: true,
@@ -29,13 +29,6 @@ function ListImageFilm({ id, type }: Props) {
       },
     ],
   };
-  useEffect(() => {
-    axiosClient.get(`/${type}/${id}/images?api_key=${API_KEY}`).then((res) => {
-      if (res.status === 200) {
-        setListImage(res?.data.backdrops);
-      }
-    });
-  }, [id, type]);
   return (
     <div className="p-5">
       <Slider {...settings} className="">

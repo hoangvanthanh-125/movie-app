@@ -7,6 +7,11 @@ const initialState = {
   anime: [],
   movieTrending: [],
   tvTrending: [],
+  filmDetaileData:{
+    listTrailer:[],
+    listActor:[],
+    listImage:[]
+  }
 };
 const filmDataSlice = createSlice({
   name: "filmData",
