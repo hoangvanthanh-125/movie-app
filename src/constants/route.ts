@@ -2,7 +2,9 @@ import ActorDetail from "../components/actorDetail";
 import FilmDetail from "../components/filmDetail";
 import FilmPage from "../components/FilmPage";
 import Home from "../components/home";
+import Login from "../components/login";
 import SearchPage from "../components/searchPage";
+import Signup from "../components/signup";
 import WatchPage from "../components/watchPage";
 export interface USER_ROUTE{
   name:string,
@@ -39,5 +41,15 @@ export const USER_ROUTER :USER_ROUTE[] = [
     path:'actor/:id/:name',
     name:'Actor',
     component:ActorDetail
+  },
+  {
+    path:'login',
+    name:'Login',
+    component:Login
+  },
+  {
+    path:'signup',
+    name:'Sigup',
+    component:Signup
   }
 ]

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import DashBoard from "./components/dashboard";
+import Login from "./components/login";
 import Sidebar from "./components/sidebar";
 import { USER_ROUTE, USER_ROUTER } from "./constants/route";
 import { fetchDataHome } from "./redux/actions/filmDataActions";
@@ -32,8 +33,8 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>{renderUserRoute()}</Routes>
-        <Sidebar />
+        <Routes>{renderUserRoute()}
+        </Routes>
       </Router>
     </>
   );

@@ -1,8 +1,13 @@
 import { faHome, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  FacebookShareCount,
+} from "react-share";
 import { getDetailFilmData } from "../../apis/filmApi";
 import { ORIGIN_PATH } from "../../constants";
 import { useAppSelector } from "../../redux/hook";
@@ -22,6 +27,7 @@ function FilmDetail({ atWatchPage }: Props) {
   const [listImage, setListImage] = useState<any>([]);
   const [listTrailer, setListTrailer] = useState<any>([]);
   const [listKeyWord, setListKeyWord] = useState<any>([]);
+  const location = useLocation();
 
   const navigate = useNavigate();
   const { movieTrending, tvTrending } = useAppSelector(
@@ -114,14 +120,16 @@ function FilmDetail({ atWatchPage }: Props) {
               <p className="text-center md:text-left">
                 {film?.original_name || film?.original_title}
               </p>
-              <div className="p-[3px] bg-colorFacebook w-[100px] text-[12px] rounded-sm text-mainTextColor mt-[10px]">
-                {" "}
-                <FontAwesomeIcon
-                  icon={faPlay}
-                  className="text-[12px] mr-[3px] ml-[3px]"
-                />
-                <span className=" ">Facebook</span>
-              </div>
+
+              <FacebookShareButton
+                url={location.pathname}
+                quote={""}
+                hashtag={"#hashtag"}
+                className="Demo__some-network__share-button text-mainTextColor mt-[10px]"
+              >
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+
               <p className="mt-[10px]">
                 Xem Phim {film?.name || film?.title} (
                 {film?.original_name || film?.original_title}) Phụ đề - thuyết
