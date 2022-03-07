@@ -2,6 +2,7 @@ import {
   faCaretDown,
   faList,
   faSearch,
+  faStamp
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -12,10 +13,13 @@ import { uiActions } from "../../redux/slice/uiSlice";
 import { DataFilter } from "../data/filterData";
 import FormSearch from "./FormSearch";
 
+
 function Header() {
   const dispatch = useAppDispatch();
   const { openSearch } = useAppSelector((state) => state.ui);
   const { pathname } = useLocation();
+  const {user} = useAppSelector(state => state.user) as any;
+  
   const navigate = useNavigate();
   const clickIconSideBar = () => {
     dispatch(uiActions.toggleSidebar());
@@ -36,6 +40,10 @@ function Header() {
       navigate(`/country/${itemOption.id}`);
     }
   };
+  const handleClickAcc = () => {
+    dispatch(uiActions.openOverlay());
+    dispatch(uiActions.openRightSidebar());
+  }
   return (
     <div className="fixed top-0 left-0 right-0 z-10 mb-[0px] text-[16px]">
       <div className="h-[60px] w-full max-w-full bg-mainBackGround  box-border text-mainTextColor flex justify-between items-center p-[10px] px-[20px] md:px-[50px] relative z-10 ">
@@ -87,11 +95,21 @@ function Header() {
             </li>
           ))}
         </ul>
-        <FontAwesomeIcon
-          onClick={() => dispatch(uiActions.toggleSearch())}
-          icon={faSearch}
-          className="px-[7px] py-[5px] bg-gray-700 cursor-pointer rounded-sm"
-        />
+        <div className="flex justify-start items-center">
+          <FontAwesomeIcon
+            onClick={() => dispatch(uiActions.toggleSearch())}
+            icon={faSearch}
+            className="px-[7px] py-[5px] bg-gray-700 cursor-pointer rounded-sm"
+          />
+        {!user ?   <div onClick={() => handleClickAcc()} className="ml-[20px] flex justify-center items-center">
+            <FontAwesomeIcon
+              icon={faStamp}
+              className="px-[7px] py-[5px] bg-gray-700 cursor-pointer rounded-sm"
+            />
+          </div>: <div onClick={() => handleClickAcc()} className=" text-mainTextColor w-[28px] h-[28px] bg-indigo-500 rounded-[25px] ml-[20px] text-center items-center flex justify-center font-semibold cursor-pointer md:hover:bg-indigo-700 transition-all">
+            {user?.displayName!?.charAt(0).toUpperCase()}
+            </div>}
+        </div>
       </div>
 
       <div

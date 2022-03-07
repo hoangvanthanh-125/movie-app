@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../App";
 
 interface Data {
   name: string;
@@ -27,6 +30,7 @@ const schema = yup
   })
   .required();
 function Signup() {
+  const auth = getAuth();
   const {
     register,
     handleSubmit,
@@ -35,7 +39,24 @@ function Signup() {
     resolver: yupResolver(schema),
     reValidateMode: "onChange",
   });
-  const onSubmit = handleSubmit((data) => {});
+  const onSubmit = handleSubmit((data) => {
+    const { email, password, name } = data;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        const { uid } = user;
+        await setDoc(doc(db, "users", uid), {
+          email,
+          displayName: name,
+          uid,
+          password,
+        });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  });
   const navigate = useNavigate();
   return (
     <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-start items-center font-semibold">
@@ -91,7 +112,7 @@ function Signup() {
         <input
           type="submit"
           className="text-mainTextColor bg-indigo-500 p-[7px] text-center w-full rounded-sm cursor-pointer hover:bg-indigo-700 mt-[10px]"
-          value="Đăng nhập"
+          value="Đăng kí"
         />
       </form>
       <p

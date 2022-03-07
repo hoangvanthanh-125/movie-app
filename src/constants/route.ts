@@ -1,4 +1,5 @@
 import ActorDetail from "../components/actorDetail";
+import Collection from "../components/collection";
 import FilmDetail from "../components/filmDetail";
 import FilmPage from "../components/FilmPage";
 import Home from "../components/home";
@@ -51,5 +52,10 @@ export const USER_ROUTER :USER_ROUTE[] = [
     path:'signup',
     name:'Sigup',
     component:Signup
+  },
+  {
+    path:'collection',
+    name:'',
+    component:Collection
   }
 ]

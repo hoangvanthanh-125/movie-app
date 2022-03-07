@@ -1,4 +1,4 @@
-import { faHome, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
@@ -17,6 +17,13 @@ import ListImageFilm from "./ListImageFilm";
 import ListKeyword from "./ListKeyword";
 import ListSimilarFilm from "./ListSimilarFilm";
 import Trailer from "./Trailer";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../../App";
+import { useSelector } from "react-redux";
+import { USER } from "../../redux/slice/userSlice";
+import { async } from "@firebase/util";
+import { Film } from "../../common/interface";
+
 interface Props {
   atWatchPage: boolean;
 }
@@ -28,6 +35,7 @@ function FilmDetail({ atWatchPage }: Props) {
   const [listTrailer, setListTrailer] = useState<any>([]);
   const [listKeyWord, setListKeyWord] = useState<any>([]);
   const location = useLocation();
+  const { user } = useAppSelector((state) => state.user) as any;
 
   const navigate = useNavigate();
   const { movieTrending, tvTrending } = useAppSelector(
@@ -67,6 +75,20 @@ function FilmDetail({ atWatchPage }: Props) {
         ));
         return result;
       }
+    }
+  };
+  const handleAddCollection = async () => {
+    if (user) {
+      const docRef = await addDoc(collection(db, "film"), {
+          id,
+          name: film?.name || "",
+          original_name: film?.original_name || "",
+          original_title: film?.original_title || "",
+          poster_path: film?.poster_path || "",
+          title: film?.title || "",
+          uid: user.uid,
+        
+      } as Film);
     }
   };
   return (
@@ -113,7 +135,7 @@ function FilmDetail({ atWatchPage }: Props) {
             <div className="flex-1 text-secondTextColor md:ml-[30px] mt-[30px] md:mt-[0]">
               <h1 className="text-2xl font-semibold text-indigo-500 text-center md:text-left">
                 {film?.title || film?.name}
-                <span className="ml-[10px] inline-block px-[5px] bg-indigo-500 text-mainTextColor rounded-md text-[16px]">
+                <span className="ml-[10px] inline-block px-[5px] bg-yellow-600 text-mainTextColor rounded-md text-[16px] w-9 text-center">
                   {film?.vote_average}
                 </span>
               </h1>
@@ -121,14 +143,26 @@ function FilmDetail({ atWatchPage }: Props) {
                 {film?.original_name || film?.original_title}
               </p>
 
-              <FacebookShareButton
-                url={location.pathname}
-                quote={""}
-                hashtag={"#hashtag"}
-                className="Demo__some-network__share-button text-mainTextColor mt-[10px]"
-              >
-                <FacebookIcon size={32} round />
-              </FacebookShareButton>
+              <div className="flex justify-start items-center ">
+                <FacebookShareButton
+                  url={location.pathname}
+                  quote={""}
+                  hashtag={"#hashtag"}
+                  className="Demo__some-network__share-button text-mainTextColor mt-[10px]"
+                >
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+                <div
+                  className="p-[4px] px-[10px] rounded-sm  text-mainTextColor  font-semibold text-[13px]  bg-red-600 hover:bg-red-700 transition-all  flex justify-center items-center cursor-pointer mt-[10px] ml-[20px] "
+                  onClick={() => handleAddCollection()}
+                >
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="text-[14px] mr-[5px]"
+                  />
+                  <span>Thêm vào bộ sưu tập</span>
+                </div>{" "}
+              </div>
 
               <p className="mt-[10px]">
                 Xem Phim {film?.name || film?.title} (

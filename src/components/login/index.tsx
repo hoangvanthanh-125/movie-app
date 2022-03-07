@@ -1,11 +1,13 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { CheckLogin } from "../../helper/checkLogin";
+import { useAppDispatch } from "../../redux/hook";
 
 interface Data {
-  name: string;
   email: string;
   password: string;
 }
@@ -19,10 +21,11 @@ const schema = yup
       .string()
       .required("Vui lòng nhập mật khẩu")
       .min(6, "Tối thiểu 6 kí tự"),
-    name: yup.string().required("Vui lòng nhập tên"),
   })
   .required();
 function Login() {
+  // CheckLogin();
+  const auth = getAuth();
   const {
     register,
     handleSubmit,
@@ -31,7 +34,18 @@ function Login() {
     resolver: yupResolver(schema),
     reValidateMode: "onChange",
   });
-  const onSubmit = handleSubmit((data) => {});
+  const onSubmit = handleSubmit((data) => {
+    const { email, password } = data;
+    signInWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  });
+
   const navigate = useNavigate();
   return (
     <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-start items-center font-semibold">
@@ -54,7 +68,7 @@ function Login() {
         </div>
         <div className="w-full my-[10px]">
           <input
-            type={"password"}
+            type="password"
             {...register("password")}
             className="outline-none border-2 border-black p-[7px]  focus:border-2 focus:border-indigo-500 w-full rounded-sm transition-all "
             placeholder="Nhập mật khẩu"
@@ -63,6 +77,7 @@ function Login() {
             {errors.password?.message}
           </p>
         </div>
+
         <input
           type="submit"
           className="text-mainTextColor bg-indigo-500 p-[7px] text-center w-full rounded-sm cursor-pointer hover:bg-indigo-700 mt-[10px]"

@@ -2,12 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 interface UI {
   openSidebar:boolean,
   openSearch:boolean,
-  openOverlay:boolean
+  openOverlay:boolean,
+  openRightSidebar:boolean
+
 }
 const initialState = {
   openSidebar:false,
   openSearch:false,
-  openOverlay:false
+  openOverlay:false,
+  openRightSidebar:false
 } as UI
 
 const uiSlice = createSlice({
@@ -25,7 +28,14 @@ const uiSlice = createSlice({
   },
   closeOverlay:(state) => {
     state.openOverlay = false;
+  },
+  openRightSidebar:(state) => {
+    state.openRightSidebar = true;
+  },
+  closeRightSidebar:(state) => {
+    state.openRightSidebar = false;
   }
+
 
   }
 

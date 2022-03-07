@@ -9,7 +9,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    
     extend: {
+
       colors:{
         hoverColor:'#3dc6c6',
         mainTextColor:'#e5e5e5',
@@ -72,5 +74,5 @@ module.exports = {
     }
     },
   },
-  plugins: [],
+  plugins: []
 }
