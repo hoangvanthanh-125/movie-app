@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import ListFilm from "../ListFilm";
@@ -6,11 +6,18 @@ import Carousel from "./Carousel";
 import ListFilmInHome from "./ListFilmInHome";
 
 function Home() {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { filmOnCarousel, popularMovie, popularTv, anime,movieTrending,tvTrending } = useAppSelector(
-    (state) => state.filmData
-  );
+  const {
+    filmOnCarousel,
+    popularMovie,
+    popularTv,
+    anime,
+    movieTrending,
+    tvTrending,
+  } = useAppSelector((state) => state.filmData);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="">
       <Carousel filmOnCarousel={filmOnCarousel} />

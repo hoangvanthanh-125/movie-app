@@ -23,6 +23,8 @@ import { useSelector } from "react-redux";
 import { USER } from "../../redux/slice/userSlice";
 import { async } from "@firebase/util";
 import { Film } from "../../common/interface";
+import FormComment from "./FormComment";
+import Comment from "./comment";
 
 interface Props {
   atWatchPage: boolean;
@@ -221,6 +223,14 @@ function FilmDetail({ atWatchPage }: Props) {
           <div>
             <ListKeyword listKeyWordFlim={listKeyWord} type={type!} id={id!} />
           </div>
+          <div>
+       <div className="mt-[20px]">
+                <h1 className=" font-semibold text-indigo-500 cursor-pointer text-2xl  mb-[10px]">
+        Bình luận phim {name}
+      </h1>
+            <Comment />
+       </div>
+          </div>
         </div>
         <div className=" col-span-12 md:col-span-4  ">
           <div>
@@ -229,7 +239,7 @@ function FilmDetail({ atWatchPage }: Props) {
                 Top phim lẻ thịnh hành
               </h1>
             </div>
-            <div className="scroll h-[600px] md:h-[450px] overflow-y-auto">
+            <div className="scroll h-[600px] md:h-[575px] overflow-y-auto">
               <ListFilm listFilm={movieTrending} isTrending={true} />
             </div>
           </div>
@@ -239,7 +249,7 @@ function FilmDetail({ atWatchPage }: Props) {
                 Top phim bộ thịnh hành
               </h1>
             </div>
-            <div className="scroll h-[600px] md:h-[450px] overflow-y-auto">
+            <div className="scroll h-[600px] md:h-[575px] overflow-y-auto">
               <ListFilm listFilm={tvTrending} isTrending={true} />
             </div>
           </div>

@@ -35,12 +35,9 @@ function App() {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
       } else {
-        
       }
-
       const token = await user.getIdToken();
       Cookies.set("token", token);
-
       dispatch(userActions.setUser(docSnap.data()));
     } else {
     }

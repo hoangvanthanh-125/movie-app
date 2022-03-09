@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
 import { CheckLogin } from "../../helper/checkLogin";
-import { useAppDispatch } from "../../redux/hook";
 
 interface Data {
   email: string;
@@ -24,7 +23,7 @@ const schema = yup
   })
   .required();
 function Login() {
-  // CheckLogin();
+  CheckLogin();
   const auth = getAuth();
   const {
     register,

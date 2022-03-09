@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../App";
+import { collection, addDoc } from "firebase/firestore"; 
 
 interface Data {
   name: string;
