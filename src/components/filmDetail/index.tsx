@@ -1,30 +1,24 @@
 import { faHome, faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  FacebookShareCount,
-} from "react-share";
+import { FacebookIcon, FacebookShareButton } from "react-share";
 import { getDetailFilmData } from "../../apis/filmApi";
+import { db } from "../../App";
+import { Film } from "../../common/interface";
+import Loading from "../../common/Loading";
+import { ToastFuncError, ToastFuncSuccess } from "../../common/toastFunc";
 import { ORIGIN_PATH } from "../../constants";
 import { useAppSelector } from "../../redux/hook";
 import ListFilm from "../ListFilm";
 import Actor from "./Actor";
+import Comment from "./comment";
 import ListImageFilm from "./ListImageFilm";
 import ListKeyword from "./ListKeyword";
 import ListSimilarFilm from "./ListSimilarFilm";
 import Trailer from "./Trailer";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../../App";
-import { useSelector } from "react-redux";
-import { USER } from "../../redux/slice/userSlice";
-import { async } from "@firebase/util";
-import { Film } from "../../common/interface";
-import FormComment from "./FormComment";
-import Comment from "./comment";
 
 interface Props {
   atWatchPage: boolean;
@@ -38,6 +32,7 @@ function FilmDetail({ atWatchPage }: Props) {
   const [listKeyWord, setListKeyWord] = useState<any>([]);
   const location = useLocation();
   const { user } = useAppSelector((state) => state.user) as any;
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const { movieTrending, tvTrending } = useAppSelector(
@@ -50,6 +45,7 @@ function FilmDetail({ atWatchPage }: Props) {
     : `${film?.episode_run_time[0]} phút / tập`;
 
   useEffect(() => {
+    setLoading(true);
     if (type && id) {
       getDetailFilmData(type, id).then((res) => {
         setfilm(res[0].data);
@@ -57,6 +53,7 @@ function FilmDetail({ atWatchPage }: Props) {
         setListImage(res[2]?.data?.backdrops);
         setListTrailer(res[3]?.data?.results);
         setListKeyWord(res[4].data?.keywords);
+        setLoading(false);
       });
     }
   }, [id, name, type]);
@@ -81,7 +78,8 @@ function FilmDetail({ atWatchPage }: Props) {
   };
   const handleAddCollection = async () => {
     if (user) {
-      const docRef = await addDoc(collection(db, "film"), {
+      try {
+        const docRef = await addDoc(collection(db, "film"), {
           id,
           name: film?.name || "",
           original_name: film?.original_name || "",
@@ -89,11 +87,14 @@ function FilmDetail({ atWatchPage }: Props) {
           poster_path: film?.poster_path || "",
           title: film?.title || "",
           uid: user.uid,
-        
-      } as Film);
+        } as Film);
+        ToastFuncSuccess("Thêm thành công");
+      } catch (error) {
+        ToastFuncError(error);
+      }
     }
   };
-  return (
+  return !loading ? (
     <div className="px-[20px] md:px-[50px]">
       {!atWatchPage && (
         <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
@@ -224,12 +225,12 @@ function FilmDetail({ atWatchPage }: Props) {
             <ListKeyword listKeyWordFlim={listKeyWord} type={type!} id={id!} />
           </div>
           <div>
-       <div className="mt-[20px]">
-                <h1 className=" font-semibold text-indigo-500 cursor-pointer text-2xl  mb-[10px]">
-        Bình luận phim {name}
-      </h1>
-            <Comment />
-       </div>
+            <div className="mt-[20px]">
+              <h1 className=" font-semibold text-indigo-500 cursor-pointer text-2xl  mb-[10px]">
+                Bình luận phim {name}
+              </h1>
+              <Comment />
+            </div>
           </div>
         </div>
         <div className=" col-span-12 md:col-span-4  ">
@@ -259,6 +260,8 @@ function FilmDetail({ atWatchPage }: Props) {
         <ListSimilarFilm type={type!} id={id!} />
       </div>
     </div>
+  ) : (
+    <Loading />
   );
 }
 

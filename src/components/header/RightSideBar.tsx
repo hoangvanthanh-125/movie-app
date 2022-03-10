@@ -9,7 +9,7 @@ import { uiActions } from "../../redux/slice/uiSlice";
 import { userActions } from "../../redux/slice/userSlice";
 
 function RightSideBar() {
-  const { user } = useAppSelector((state) => state.user);  
+  const { user } = useAppSelector((state) => state.user) as any;
   const { openRightSidebar } = useAppSelector((state) => state.ui);
   const dispatch = useAppDispatch();
 
@@ -28,12 +28,9 @@ function RightSideBar() {
         dispatch(uiActions.closeRightSidebar());
         dispatch(userActions.setUser(null));
         Cookies.remove("token");
-        navigate('/login')
-
+        navigate("/login");
       })
-      .catch((error) => {
-      });
-
+      .catch((error) => {});
   };
 
   return (
@@ -42,12 +39,17 @@ function RightSideBar() {
         !openRightSidebar ? "translate-x-full" : "translate-x-[0]"
       } transition-all`}
     >
-      <div
+      {user ? <div className="flex flex-col justify-center items-center p-[10px]">
+        <div className=" text-mainTextColor w-[80px] h-[80px] bg-indigo-500 rounded-[80px]  text-center items-center flex justify-center font-semibold cursor-pointer md:hover:bg-indigo-700 transition-all border-2 border-mainTextColor">
+          {user?.displayName!?.charAt(0).toUpperCase()}
+        </div>
+        <p className="text-center mt-[5px] font-semibold">{user?.displayName}</p>
+      </div>:<div
         className="max-w-[200px] first-letter:text-[30px] first-letter:font-bold text-indigo-500 cursor-pointer text-center p-[10px]"
         onClick={() => handleClick("/")}
       >
         Film24h
-      </div>
+      </div>}
       {!user ? (
         <div
           onClick={() => handleClick("/login")}
@@ -59,16 +61,21 @@ function RightSideBar() {
       ) : (
         <div
           onClick={() => handleLogOut()}
-          className="flex justify-start items-center p-[10px] cursor-pointer md:hover:bg-indigo-500 transition-all border-b border-b-mainTextColor"
+          className="flex justify-start items-center p-[10px] cursor-pointer md:hover:bg-indigo-500 transition-all border-y border-y-mainTextColor"
         >
           <FontAwesomeIcon icon={faUser} className="mr-[10px] text-[12px]" />
           <span>Đăng xuất</span>
         </div>
       )}
-     {user &&  <div onClick={() => handleClick('/collection')} className="flex justify-start items-center p-[10px] cursor-pointer md:hover:bg-indigo-500 transition-all border-b border-b-mainTextColor">
-        <FontAwesomeIcon icon={faHeart} className="mr-[10px] text-[12px]" />
-        <span>Phim yêu thích</span>
-      </div>}
+      {user && (
+        <div
+          onClick={() => handleClick("/collection")}
+          className="flex justify-start items-center p-[10px] cursor-pointer md:hover:bg-indigo-500 transition-all border-b border-b-mainTextColor"
+        >
+          <FontAwesomeIcon icon={faHeart} className="mr-[10px] text-[12px]" />
+          <span>Phim yêu thích</span>
+        </div>
+      )}
     </div>
   );
 }

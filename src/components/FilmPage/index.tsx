@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getListFilm } from "../../apis/filmApi";
+import Loading from "../../common/Loading";
 import { findTitileFilmPage } from "../../helper/findTitleFilmPage";
 import FilterFilm from "../FilterFilm";
 import ListFilm from "../ListFilm";
@@ -17,6 +18,7 @@ export interface Filter {
 function FilmPage() {
   const { type, option } = useParams();
   let title = findTitileFilmPage(type!, option!);
+  const [loading,setLoading] = useState(true);
 
   const [filters, setFilters] = useState<Filter>({
     page: 1,
@@ -29,6 +31,7 @@ function FilmPage() {
   const [listFilm, setListFilm] = useState();
   const navigate = useNavigate();
   useEffect(() => {
+    setLoading(true);
     const fetchFilm = async () => {
       const { page, year, genre, sortBy, country } = filters;
       const respon = await getListFilm(
@@ -39,6 +42,7 @@ function FilmPage() {
       const { results, total_pages } = respon?.data;
       setTotalPage(total_pages);
       setListFilm(results);
+      setLoading(false);
     };
     fetchFilm();
   }, [filters, type, option]);
@@ -51,32 +55,32 @@ function FilmPage() {
     setFilters(filter);
   };
   return (
-    <div className="px-[20px] md:px-[50px] rounded-sm ">
-      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
-        <div
-          onClick={() => navigate("/")}
-          className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
-        >
-          <FontAwesomeIcon icon={faHome} className="text-[14px]" />
-          <span className="ml-[5px]">Trang chủ</span>
-        </div>
-        <span className="mx-[5px]">/</span>
-        <span>{title}</span>
-      </div>
-      <h1 className="text-indigo-500 text-2xl font-semibold mt-[30px]">
-        {title}
-      </h1>
-      <FilterFilm handleFilter={handleFilter} />
-      <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px]">
-        <ListFilm listFilm={listFilm} />
-      </div>
+!loading ?     <div className="px-[20px] md:px-[50px] rounded-sm ">
+<div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
+  <div
+    onClick={() => navigate("/")}
+    className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
+  >
+    <FontAwesomeIcon icon={faHome} className="text-[14px]" />
+    <span className="ml-[5px]">Trang chủ</span>
+  </div>
+  <span className="mx-[5px]">/</span>
+  <span>{title}</span>
+</div>
+<h1 className="text-indigo-500 text-2xl font-semibold mt-[30px]">
+  {title}
+</h1>
+<FilterFilm handleFilter={handleFilter} />
+<div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px]">
+  <ListFilm listFilm={listFilm} />
+</div>
 
-      <Pagination
-        totalPage={totalPage}
-        handlePageChange={handlePageChange}
-        currentPage={filters.page}
-      />
-    </div>
+<Pagination
+  totalPage={totalPage}
+  handlePageChange={handlePageChange}
+  currentPage={filters.page}
+/>
+</div>:<Loading />
   );
 }
 

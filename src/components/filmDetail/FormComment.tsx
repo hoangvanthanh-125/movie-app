@@ -72,13 +72,13 @@ function FormComment() {
           ></textarea>
         </div>
         <div
-          className={`flex justify-end items-center w-full border border-gray-500 p-[10px] mt-[-7px] ${
+          className={`flex justify-end items-center w-full border border-gray-500 p-[5px] mt-[-7px] ${
             focus ? "block" : "hidden"
           } bg-gray-200`}
         >
           <input
             type="submit"
-            className="text-mainTextColor bg-indigo-500 p-[7px] text-center  rounded-sm cursor-pointer hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-default"
+            className="text-mainTextColor bg-indigo-500 px-[7px] py-[3px] text-center  rounded-sm cursor-pointer hover:bg-indigo-700 disabled:bg-indigo-400 disabled:cursor-default"
             value="Đăng"
             disabled={content?.trim() ? false : true}
           />

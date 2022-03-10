@@ -12,6 +12,8 @@ import { userActions } from "./redux/slice/userSlice";
 import Cookies from "js-cookie";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDfK4c1KdE88CZfa-p3ZY2QBksW-FT7esU",
@@ -68,6 +70,7 @@ function App() {
       <Router>
         <Routes>{renderUserRoute()}</Routes>
       </Router>
+      <ToastContainer autoClose={1500} />{" "}
     </>
   );
 }

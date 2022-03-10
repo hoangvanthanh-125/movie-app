@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
+import { ToastFuncError, ToastFuncSuccess } from "../../common/toastFunc";
 import { CheckLogin } from "../../helper/checkLogin";
 
 interface Data {
@@ -37,11 +38,11 @@ function Login() {
     const { email, password } = data;
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
+        ToastFuncSuccess('Đăng nhập thành công')
         navigate("/");
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        alert(errorMessage);
+        ToastFuncError(error);
       });
   });
 

@@ -6,7 +6,10 @@ import * as yup from "yup";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../App";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { ToastFuncError, ToastFuncSuccess } from "../../common/toastFunc";
+import { CheckLogin } from "../../helper/checkLogin";
 
 interface Data {
   name: string;
@@ -31,6 +34,7 @@ const schema = yup
   })
   .required();
 function Signup() {
+  CheckLogin();
   const auth = getAuth();
   const {
     register,
@@ -52,10 +56,11 @@ function Signup() {
           uid,
           password,
         });
+        ToastFuncSuccess("Đăng kí thành công,đã đăng nhập");
+        navigate('/');
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        alert(errorMessage);
+        ToastFuncError(error);
       });
   });
   const navigate = useNavigate();

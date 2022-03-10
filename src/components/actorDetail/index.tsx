@@ -5,6 +5,7 @@ import { ORIGIN_PATH } from "../../constants";
 import ListFilm from "../ListFilm";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Loading from "../../common/Loading";
 
 function ActorDetail() {
   const { id, name } = useParams();
@@ -12,15 +13,17 @@ function ActorDetail() {
   const [listTv, setListTv] = useState<any>([]);
   const [actor, setActor] = useState<any>();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDetailActor(id!).then((res) => {
       setActor(res[0]?.data);
       setListMovie(res[1]?.data?.cast);
       setListTv(res[2]?.data?.cast);
+      setLoading(false);
     });
   }, [id]);
-  return (
+  return !loading ? (
     <div className="px-[20px] md:px-[50px]">
       <div className="mb-[30px]">
         <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start  mt-[30px] py-[20px] ">
@@ -92,6 +95,8 @@ function ActorDetail() {
         )}
       </div>
     </div>
+  ) : (
+    <Loading />
   );
 }
 

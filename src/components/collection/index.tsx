@@ -6,11 +6,15 @@ import ListFilm from "../ListFilm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
+import Loading from "../../common/Loading";
+import { CheckNotLogin } from "../../helper/checkNotLogin";
 
 function Collection() {
+  CheckNotLogin();
   const { user } = useAppSelector((state) => state.user) as any;
   const [listFilm, setListFilm] = useState([1]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user) {
       let listFilm = [] as any;
@@ -24,10 +28,11 @@ function Collection() {
         setListFilm(listFilm);
       };
       fetchListFilm();
+      setLoading(false);
     }
   }, [user]);
 
-  return (
+  return !loading ? (
     <div className="px-[20px] md:px-[50px]">
       <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px] mb-[30px]">
         <div
@@ -54,12 +59,17 @@ function Collection() {
           <h1 className="text-indigo-500 text-2xl font-semibold mb-[10px]">
             Chưa có phim yêu thích
           </h1>
-          <button onClick={() => navigate('/')} className="outline-none border-none p-[10px] bg-indigo-500 md:cursor-pointer md:hover:bg-indigo-700 " >
+          <button
+            onClick={() => navigate("/")}
+            className="outline-none border-none p-[10px] bg-indigo-500 md:cursor-pointer md:hover:bg-indigo-700 "
+          >
             Trở về trang chủ
           </button>
         </div>
       )}
     </div>
+  ) : (
+    <Loading />
   );
 }
 

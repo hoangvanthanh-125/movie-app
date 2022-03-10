@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { fetchListSearch } from "../../apis/filmApi";
+import Loading from "../../common/Loading";
 import ListFilm from "../ListFilm";
 import Pagination from "../Pagination";
 
@@ -10,10 +11,12 @@ function SearchPage() {
   const [totalResult, setTotalResult] = useState(0);
   const [page, setPage] = useState(1);
   const [listFilm, setListFilm] = useState([]);
+  const [loading, setLoading] = useState(false);
   const handlePageChange = (page: number) => {
     setPage(page);
   };
   useEffect(() => {
+    setLoading(true);
     fetchListSearch(query!, page).then((res) => {
       const data = res.data;
       if (res.status === 200) {
@@ -31,10 +34,11 @@ function SearchPage() {
           listFilm = listFilm?.concat(item?.known_for);
         });
         setListFilm(listFilm);
+        setLoading(false);
       }
     });
   }, [query, page]);
-  return (
+  return !loading ? (
     <div className="text-mainTextColor p-[20px] md:p-[50px] md:pt-[30px]">
       <h1 className="text-2xl font-semibold">
         Có <span className="text-indigo-500">{totalResult}</span> kết quả được
@@ -49,6 +53,8 @@ function SearchPage() {
         handlePageChange={handlePageChange}
       />
     </div>
+  ) : (
+    <Loading />
   );
 }
 
