@@ -15,10 +15,7 @@
     id: "fr",
     name: "Pháp",
   },
-  {
-    id: "",
-    name: "Canada",
-  },
+  
   {
     id: "ja",
     name: "Nhật bản",
@@ -112,7 +109,7 @@ const genres = [
   } ,
   {
   id:  99 ,
-  name:  " Phim tài liệu "
+  name:  "Tài liệu "
   } ,
   {
   id:  10751 ,
@@ -148,11 +145,11 @@ const genres = [
   } ,
   {
    id :  10770 ,
-   name :  " Phim truyền hình "
+   name :  "Truyền hình "
   } ,
   {
    id :  53 ,
-   name :  " Phim kinh dị "
+   name :  "Kinh dị "
   } ,
   {
    id :  10752 ,

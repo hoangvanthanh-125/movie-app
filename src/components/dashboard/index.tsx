@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../redux/hook';
+import Footer from '../footer';
 import Header from '../header';
 import RightSideBar from '../header/RightSideBar';
 import Overlay from '../overlay';
@@ -21,6 +22,7 @@ function DashBoard({children} : Props) {
       <div className={`${!openSearch ? 'mt-[30px]' : 'mt-[140px] delay-0' } transition-all pt-[30px] `}>
         {children}
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { db } from "../../App";
 import { Comment } from "../../common/interface";
 import uniqid from "uniqid";
 import dayjs from "dayjs";
+import { ToastFuncSuccess } from "../../common/toastFunc";
 
 interface Data {
   comment: string;
@@ -47,6 +48,7 @@ function FormComment() {
         alert(error.message);
       }
     } else {
+      ToastFuncSuccess('Đăng nhập để bình luận')
       navigate("/login");
     }
   });
@@ -56,9 +58,9 @@ function FormComment() {
 
   return (
     <div className="mb-[20px] flex justify-start items-center">
-      <div className="w-[40px] h-[40px]  bg-indigo-500  flex justify-center items-center rounded-[40px] mr-[10px] font-semibold text-mainTextColor">
+      {user && <div className="w-[40px] h-[40px]  bg-indigo-500  flex justify-center items-center rounded-[40px] mr-[10px] font-semibold text-mainTextColor">
         {user?.displayName?.charAt(0)?.toUpperCase()}
-      </div>
+      </div>}
       <form
         onSubmit={onSubmit}
         className="max-w-full w-full box-border flex flex-col  justify-start items-center"

@@ -1,19 +1,20 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import Cookies from "js-cookie";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import DashBoard from "./components/dashboard";
+import Login from "./components/login";
+import Signup from "./components/signup";
 import { USER_ROUTE, USER_ROUTER } from "./constants/route";
 import { fetchDataHome } from "./redux/actions/filmDataActions";
-import { useAppDispatch } from "./redux/hook";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useAppDispatch, useAppSelector } from "./redux/hook";
 import { userActions } from "./redux/slice/userSlice";
-import Cookies from "js-cookie";
-import { getFirestore } from "firebase/firestore";
-import { doc, getDoc } from "firebase/firestore";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDfK4c1KdE88CZfa-p3ZY2QBksW-FT7esU",
@@ -68,8 +69,12 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>{renderUserRoute()}</Routes>
+        <Routes>{renderUserRoute()}
+        <Route element={<Login />} path='/login' />
+        <Route element={<Signup />} path='/signup' />
+        </Routes>
       </Router>
+
       <ToastContainer autoClose={1500} />{" "}
     </>
   );

@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
+import ButtonLoading from "../../common/ButtonLoading";
 import { ToastFuncError, ToastFuncSuccess } from "../../common/toastFunc";
 import { CheckLogin } from "../../helper/checkLogin";
 
@@ -25,6 +26,8 @@ const schema = yup
   .required();
 function Login() {
   CheckLogin();
+  const [loading, setLoading] = useState(false);
+
   const auth = getAuth();
   const {
     register,
@@ -36,19 +39,22 @@ function Login() {
   });
   const onSubmit = handleSubmit((data) => {
     const { email, password } = data;
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
-        ToastFuncSuccess('Đăng nhập thành công')
+        ToastFuncSuccess("Đăng nhập thành công");
         navigate("/");
+        setLoading(false);
       })
       .catch((error) => {
         ToastFuncError(error);
+        setLoading(false);
       });
   });
 
   const navigate = useNavigate();
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-start items-center font-semibold">
+    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-start items-center font-semibold p-[30px] bg-mainTextColor rounded-md">
       <h1 className="max-w-[200px] first-letter:font-bold text-indigo-500 cursor-pointer text-2xl text-center mb-[10px]">
         Đăng nhập
       </h1>
@@ -59,7 +65,7 @@ function Login() {
         <div className="w-full my-[5px]">
           <input
             {...register("email")}
-            className="outline-none border-2 border-black  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
+            className="outline-none border border-gray-400  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
             placeholder="Nhập email"
           />
           <p className="text-red-600 font-normal mt-[5px] text-[12px]">
@@ -70,18 +76,18 @@ function Login() {
           <input
             type="password"
             {...register("password")}
-            className="outline-none border-2 border-black p-[7px]  focus:border-2 focus:border-indigo-500 w-full rounded-sm transition-all "
+            className="outline-none border border-gray-400 p-[7px]  focus:border-2 focus:border-indigo-500 w-full rounded-sm transition-all "
             placeholder="Nhập mật khẩu"
           />
           <p className="text-red-600 font-normal mt-[5px] text-[12px]">
             {errors.password?.message}
           </p>
         </div>
-
-        <input
-          type="submit"
-          className="text-mainTextColor bg-indigo-500 p-[7px] text-center w-full rounded-sm cursor-pointer hover:bg-indigo-700 mt-[10px]"
-          value="Đăng nhập"
+        <ButtonLoading
+          handleClick={onSubmit}
+          loading={loading}
+          title="Đăng nhập"
+          width="full"
         />
       </form>
       <p

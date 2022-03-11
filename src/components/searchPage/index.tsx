@@ -47,11 +47,13 @@ function SearchPage() {
       <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px] mb-[20px]">
         <ListFilm listFilm={listFilm} />
       </div>
-      <Pagination
-        totalPage={totalPage}
-        currentPage={page}
-        handlePageChange={handlePageChange}
-      />
+      {totalResult > 0 && (
+        <Pagination
+          totalPage={totalPage}
+          currentPage={page}
+          handlePageChange={handlePageChange}
+        />
+      )}
     </div>
   ) : (
     <Loading />

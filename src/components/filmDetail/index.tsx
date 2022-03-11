@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import { getDetailFilmData } from "../../apis/filmApi";
 import { db } from "../../App";
+import ButtonLoading from "../../common/ButtonLoading";
 import { Film } from "../../common/interface";
 import Loading from "../../common/Loading";
 import { ToastFuncError, ToastFuncSuccess } from "../../common/toastFunc";
@@ -33,6 +34,7 @@ function FilmDetail({ atWatchPage }: Props) {
   const location = useLocation();
   const { user } = useAppSelector((state) => state.user) as any;
   const [loading, setLoading] = useState(false);
+  const [loadingAddCollection, setLoadingAddCollection] = useState(false);
 
   const navigate = useNavigate();
   const { movieTrending, tvTrending } = useAppSelector(
@@ -79,7 +81,8 @@ function FilmDetail({ atWatchPage }: Props) {
   const handleAddCollection = async () => {
     if (user) {
       try {
-        const docRef = await addDoc(collection(db, "film"), {
+        setLoadingAddCollection(true);
+        await addDoc(collection(db, "film"), {
           id,
           name: film?.name || "",
           original_name: film?.original_name || "",
@@ -91,6 +94,8 @@ function FilmDetail({ atWatchPage }: Props) {
         ToastFuncSuccess("Thêm thành công");
       } catch (error) {
         ToastFuncError(error);
+      } finally {
+        setLoadingAddCollection(false);
       }
     }
   };
@@ -155,16 +160,25 @@ function FilmDetail({ atWatchPage }: Props) {
                 >
                   <FacebookIcon size={32} round />
                 </FacebookShareButton>
-                <div
-                  className="p-[4px] px-[10px] rounded-sm  text-mainTextColor  font-semibold text-[13px]  bg-red-600 hover:bg-red-700 transition-all  flex justify-center items-center cursor-pointer mt-[10px] ml-[20px] "
-                  onClick={() => handleAddCollection()}
-                >
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    className="text-[14px] mr-[5px]"
+
+                <div className="ml-[10px]">
+                  <ButtonLoading
+                    title={
+                      <>
+                        {!loadingAddCollection && (
+                          <FontAwesomeIcon
+                            icon={faPlus}
+                            className="text-[14px] mr-[5px]"
+                          />
+                        )}
+                        <span>Thêm vào bộ sưu tập</span>
+                      </>
+                    }
+                    loading={loadingAddCollection}
+                    handleClick={handleAddCollection}
+                    bg="red-600"
                   />
-                  <span>Thêm vào bộ sưu tập</span>
-                </div>{" "}
+                </div>
               </div>
 
               <p className="mt-[10px]">

@@ -22,7 +22,6 @@ function Collection() {
         const q = query(collection(db, "film"), where("uid", "==", user.uid));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          console.log(doc.id, " => ", doc.data());
           listFilm.push(doc.data());
         });
         setListFilm(listFilm);
@@ -33,8 +32,9 @@ function Collection() {
   }, [user]);
 
   return !loading ? (
-    <div className="px-[20px] md:px-[50px]">
-      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px] mb-[30px]">
+    <div className="w-full min-h-[600px]">
+      <div className="px-[20px] md:px-[50px]">
+      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px] mb-[30px] ">
         <div
           onClick={() => navigate("/")}
           className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
@@ -55,7 +55,8 @@ function Collection() {
           </div>
         </div>
       ) : (
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-mainTextColor flex justify-center items-center flex-col">
+       <div className="">
+          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-mainTextColor flex justify-center items-center flex-col">
           <h1 className="text-indigo-500 text-2xl font-semibold mb-[10px]">
             Chưa có phim yêu thích
           </h1>
@@ -66,7 +67,9 @@ function Collection() {
             Trở về trang chủ
           </button>
         </div>
+       </div>
       )}
+    </div>
     </div>
   ) : (
     <Loading />

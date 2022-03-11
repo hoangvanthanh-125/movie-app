@@ -44,16 +44,6 @@ export const USER_ROUTER :USER_ROUTE[] = [
     component:ActorDetail
   },
   {
-    path:'login',
-    name:'Login',
-    component:Login
-  },
-  {
-    path:'signup',
-    name:'Sigup',
-    component:Signup
-  },
-  {
     path:'collection',
     name:'',
     component:Collection

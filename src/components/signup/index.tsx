@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,6 +10,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { ToastFuncError, ToastFuncSuccess } from "../../common/toastFunc";
 import { CheckLogin } from "../../helper/checkLogin";
+import ButtonLoading from "../../common/ButtonLoading";
 
 interface Data {
   name: string;
@@ -35,6 +36,7 @@ const schema = yup
   .required();
 function Signup() {
   CheckLogin();
+  const [loading, setLoading] = useState(false);
   const auth = getAuth();
   const {
     register,
@@ -46,6 +48,7 @@ function Signup() {
   });
   const onSubmit = handleSubmit((data) => {
     const { email, password, name } = data;
+    setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
@@ -57,15 +60,18 @@ function Signup() {
           password,
         });
         ToastFuncSuccess("Đăng kí thành công,đã đăng nhập");
-        navigate('/');
+        navigate("/");
+        setLoading(false);
       })
       .catch((error) => {
         ToastFuncError(error);
+        setLoading(false);
       });
   });
   const navigate = useNavigate();
   return (
-    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-start items-center font-semibold">
+    <div className="px-4 flex justify-center items-center h-screen w-screen">
+      <div className="flex flex-col justify-start items-center font-semibold  p-[30px] bg-mainTextColor rounded-md box-border">
       <h1 className="max-w-[200px] first-letter:font-bold text-indigo-500 cursor-pointer text-2xl text-center mb-[10px]">
         Đăng ký
       </h1>
@@ -76,7 +82,7 @@ function Signup() {
         <div className="w-full my-[5px]">
           <input
             {...register("name")}
-            className="outline-none border-2 border-black  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
+            className="outline-none border-1 border-gray-400  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
             placeholder="Nhập tên"
           />
           <p className="text-red-600 font-normal mt-[5px] text-[12px]">
@@ -86,7 +92,7 @@ function Signup() {
         <div className="w-full my-[5px]">
           <input
             {...register("email")}
-            className="outline-none border-2 border-black  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
+            className="outline-none border border-gray-400  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
             placeholder="Nhập email"
           />
           <p className="text-red-600 font-normal mt-[5px] text-[12px]">
@@ -97,7 +103,7 @@ function Signup() {
           <input
             type="password"
             {...register("password")}
-            className="outline-none border-2 border-black p-[7px]  focus:border-2 focus:border-indigo-500 w-full rounded-sm transition-all "
+            className="outline-none border border-gray-400 p-[7px]  focus:border-2 focus:border-indigo-500 w-full rounded-sm transition-all "
             placeholder="Nhập mật khẩu"
           />
           <p className="text-red-600 font-normal mt-[5px] text-[12px]">
@@ -108,17 +114,18 @@ function Signup() {
           <input
             type="password"
             {...register("confirmPassword")}
-            className="outline-none border-2 border-black  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
+            className="outline-none border border-gray-400  p-[7px] focus:border-2 focus:border-indigo-500 w-full rounded-sm"
             placeholder="Nhập lại mật khẩu"
           />
           <p className="text-red-600 font-normal mt-[5px] text-[12px]">
             {errors.confirmPassword?.message}
           </p>
         </div>
-        <input
-          type="submit"
-          className="text-mainTextColor bg-indigo-500 p-[7px] text-center w-full rounded-sm cursor-pointer hover:bg-indigo-700 mt-[10px]"
-          value="Đăng kí"
+        <ButtonLoading
+          handleClick={onSubmit}
+          loading={loading}
+          title="Đăng kí"
+          width="full"
         />
       </form>
       <p
@@ -127,6 +134,7 @@ function Signup() {
       >
         Bạn đã có tài khoản ?
       </p>
+    </div>
     </div>
   );
 }
