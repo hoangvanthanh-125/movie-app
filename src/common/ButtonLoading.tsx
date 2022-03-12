@@ -12,10 +12,10 @@ function ButtonLoading({ title, loading, handleClick, bg, width }: Props) {
       disabled={loading}
       onClick={() => handleClick()}
       className={`text-mainTextColor ${
-        bg ? `bg-${bg!}` : "bg-indigo-500"
+        bg ? `bg-red-600` : "bg-indigo-500"
       } p-[7px] text-center ${
         width ? "w-full" : `w-[${width}]`
-      } rounded-sm cursor-pointer hover:opacity-80 mt-[10px] flex justify-center items-center disabled:opacity-30 disabled:cursor-default`}
+      } rounded-sm cursor-pointer hover:opacity-80 mt-[10px] flex justify-center items-center disabled:opacity-30 disabled:cursor-default `}
     >
       {loading && (
         <img

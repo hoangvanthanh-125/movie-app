@@ -13,17 +13,17 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import { USER_ROUTE, USER_ROUTER } from "./constants/route";
 import { fetchDataHome } from "./redux/actions/filmDataActions";
-import { useAppDispatch, useAppSelector } from "./redux/hook";
+import { useAppDispatch } from "./redux/hook";
 import { userActions } from "./redux/slice/userSlice";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDfK4c1KdE88CZfa-p3ZY2QBksW-FT7esU",
-  authDomain: "movieapp-38175.firebaseapp.com",
-  projectId: "movieapp-38175",
-  storageBucket: "movieapp-38175.appspot.com",
-  messagingSenderId: "1037860252271",
-  appId: "1:1037860252271:web:439d43dfccc1739295bb9a",
-  measurementId: "G-BB5NXHB1RE",
+  apiKey: "AIzaSyDKMuS-rA2KDGLzhy3DAEOzMXvt2oZY1TA",
+  authDomain: "film24h-f49cb.firebaseapp.com",
+  projectId: "film24h-f49cb",
+  storageBucket: "film24h-f49cb.appspot.com",
+  messagingSenderId: "961970532205",
+  appId: "1:961970532205:web:0b26fb63a1581b789e3464",
+  measurementId: "G-S5DBLJLHXZ"
 };
 
 const app = initializeApp(firebaseConfig);
