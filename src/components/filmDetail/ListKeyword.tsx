@@ -11,14 +11,7 @@ interface Props {
   listKeyWordFlim:any
 }
 function ListKeyword({type,id,listKeyWordFlim}:Props) {
-  // const [listKeyword,setlistKeyword] = useState<any>([]);    
-  // useEffect(() => {
-  // axiosClient.get(`/${type}/${id}/keywords?api_key=${API_KEY}`).then((res) => {
-  //   if(res.status === 200){
-  //     setlistKeyword(res?.data?.keywords);
-  //   }
-  // })
-  // },[id,type])
+ 
   return (
     <div className='text-secondTextColor flex justify-start items-center flex-wrap mt-[10px]'>
       <div className='flex justify-start items-center'><FontAwesomeIcon icon={faTag}/>  <span className='ml-[5px]'>Keywords : </span> </div>

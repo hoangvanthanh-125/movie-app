@@ -35,8 +35,8 @@ function Pagination({ totalPage, handlePageChange, currentPage }: Props) {
       {pageArr.slice(currentPage - 1, currentPage + 5).map((item) => (
         <div
           onClick={() => handleClickPageNumber(item)}
-          className={`text-mainTextColor w-[30px] h-[30px] p-[5px] bg-gray-700 mx-[5px] text-center ${
-            item === currentPage ? "bg-indigo-500" : ""
+          className={`text-mainTextColor w-[30px] h-[30px] p-[5px] mx-[5px] text-center ${
+            item === currentPage ? "bg-indigo-500" : "bg-gray-700"
           } cursor-pointer hover:bg-indigo-400 transition-all `}
           key={item}
         >

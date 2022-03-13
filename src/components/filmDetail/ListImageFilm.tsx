@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
-import axiosClient from "../../apis/axiosClient";
-import { API_KEY } from "../../constants";
 
 interface Props {
   type: string;
@@ -14,16 +12,48 @@ function ListImageFilm({ id, type,listImage }: Props) {
   var settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: countImage > 3 ? 3: countImage,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
       {
-        breakpoint: 433,
+        breakpoint: 1110,
         settings: {
-          slidesToShow: countImage > 3 ? 3 : countImage,
+          slidesToShow: countImage > 2 ? 2: countImage,
           infinite: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 794,
+        settings: {
+          slidesToShow: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: countImage > 3 ? 3: countImage,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 707,
+        settings: {
+          slidesToShow: countImage > 2 ? 2: countImage,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 503,
+        settings: {
+          slidesToShow: 1,
+          infinite: true,
           dots: false,
         },
       },
@@ -31,17 +61,17 @@ function ListImageFilm({ id, type,listImage }: Props) {
   };
   return (
     <div className="p-5">
-      <Slider {...settings} className="">
+      <Slider {...settings} >
         {listImage?.length > 0 &&
           listImage?.map((item: any, index: number) => {
             if (item?.file_path !== null) {
               return (
                 <div className="text-secondTextColor actorItem" key={index}>
                   <img
-                    className={`w-[${item?.width}px] h-[${item?.height}px]  object-cover`}
+                    className={`w-[200px] h-[150px]  object-cover`}
                     src={`https://image.tmdb.org/t/p/w138_and_h175_face${item.file_path!}`}
                     alt=""
-                  />
+                  /> 
                   <p className="text-[12px] mt-[5px] ">{item?.name}</p>
                 </div>
               );

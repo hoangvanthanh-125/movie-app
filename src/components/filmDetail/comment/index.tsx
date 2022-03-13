@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from "react";
-import FormComment from "../FormComment";
-import ListComment from "./ListComment";
 import {
-  collection,
-  limit,
-  onSnapshot,
+  collection, onSnapshot,
   orderBy,
   query,
-  where,
+  where
 } from "firebase/firestore";
-import { db } from "../../../App";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router";
+import { db } from "../../../App";
+import FormComment from "../FormComment";
+import ListComment from "./ListComment";
 
 function Comment() {
   const { id, type } = useParams();

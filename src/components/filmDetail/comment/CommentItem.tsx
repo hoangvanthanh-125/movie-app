@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React from 'react';
 import { Comment } from '../../../common/interface';
 interface Props{

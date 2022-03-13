@@ -36,7 +36,7 @@ function RightSideBar() {
   return (
     <div
       className={`fixed w-[250px] bg-mainBackGround top-0 right-0 bottom-0 z-10 text-mainTextColor text-[16px] ${
-        !openRightSidebar ? "translate-x-full" : "translate-x-[0]"
+        !openRightSidebar ? "translate-x-full" : "translate-x-0"
       } transition-all`}
     >
       {user ? <div className="flex flex-col justify-center items-center p-[10px]">

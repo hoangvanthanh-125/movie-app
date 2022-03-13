@@ -118,11 +118,13 @@ function FilmDetail({ atWatchPage }: Props) {
         <div className="md:col-span-8 col-span-12">
           <div className=" flex flex-col md:flex-row md:justify-start md:items-start ">
             <div className="flex flex-col justify-center items-center">
-              <img
-                className="w-[150px] h-auto"
-                src={`${ORIGIN_PATH}${film?.poster_path}`}
-                alt=""
-              />
+              {film && (
+                <img
+                  className="w-[150px] h-auto"
+                  src={`${ORIGIN_PATH}${film?.poster_path}`}
+                  alt=""
+                />
+              )}
               <div
                 className="p-[4px] rounded-sm  text-mainTextColor  font-semibold text-[13px] border border-indigo-400 bg-indigo-500 hover:bg-indigo-700 transition-all w-[100px] flex justify-center items-center cursor-pointer mt-[10px] "
                 onClick={() =>

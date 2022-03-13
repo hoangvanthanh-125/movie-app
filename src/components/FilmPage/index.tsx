@@ -18,7 +18,7 @@ export interface Filter {
 function FilmPage() {
   const { type, option } = useParams();
   let title = findTitileFilmPage(type!, option!);
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [filters, setFilters] = useState<Filter>({
     page: 1,
@@ -55,32 +55,39 @@ function FilmPage() {
     setFilters(filter);
   };
   return (
-!loading ?     <div className="px-[20px] md:px-[50px] rounded-sm ">
-<div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
-  <div
-    onClick={() => navigate("/")}
-    className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
-  >
-    <FontAwesomeIcon icon={faHome} className="text-[14px]" />
-    <span className="ml-[5px]">Trang chủ</span>
-  </div>
-  <span className="mx-[5px]">/</span>
-  <span>{title}</span>
-</div>
-<h1 className="text-indigo-500 text-2xl font-semibold mt-[30px]">
-  {title}
-</h1>
-<FilterFilm handleFilter={handleFilter} />
-<div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px]">
-  <ListFilm listFilm={listFilm} />
-</div>
+    <div className="px-[20px] md:px-[50px] rounded-sm ">
+      <div className="w-full h-[30px] bg-gray-700 text-mainTextColor flex items-center justify-start py-[10px] mt-[30px]">
+        <div
+          onClick={() => navigate("/")}
+          className="ml-[10px] hover:text-indigo-500 cursor-pointer transition-all"
+        >
+          <FontAwesomeIcon icon={faHome} className="text-[14px]" />
+          <span className="ml-[5px]">Trang chủ</span>
+        </div>
+        <span className="mx-[5px]">/</span>
+        <span>{title}</span>
+      </div>
+      <h1 className="text-indigo-500 text-2xl font-semibold mt-[30px]">
+        {title}
+      </h1>
+      <FilterFilm handleFilter={handleFilter} />
 
-<Pagination
-  totalPage={totalPage}
-  handlePageChange={handlePageChange}
-  currentPage={filters.page}
-/>
-</div>:<Loading />
+      {!loading ? (
+        <div>
+          <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-[20px]">
+            <ListFilm listFilm={listFilm} />
+          </div>
+
+          <Pagination
+            totalPage={totalPage}
+            handlePageChange={handlePageChange}
+            currentPage={filters.page}
+          />
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </div>
   );
 }
 
