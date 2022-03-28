@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import Loading from "../../common/Loading";
+import { useAppSelector } from "../../redux/hook";
 import ListFilm from "../ListFilm";
 import Carousel from "./Carousel";
 import ListFilmInHome from "./ListFilmInHome";
@@ -14,11 +15,12 @@ function Home() {
     anime,
     movieTrending,
     tvTrending,
+    loading,
   } = useAppSelector((state) => state.filmData);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  return (
+  return !loading ? (
     <div className="">
       <Carousel filmOnCarousel={filmOnCarousel} />
       <div className="">
@@ -54,6 +56,8 @@ function Home() {
         </div>
       </div>
     </div>
+  ) : (
+    <Loading />
   );
 }
 

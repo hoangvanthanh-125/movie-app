@@ -26,7 +26,7 @@ function Pagination({ totalPage, handlePageChange, currentPage }: Props) {
     }
   };
   return (
-    <div className="flex items-center justify-center mb-[10px]">
+    <div className="flex items-center justify-center mb-[10px] mt-[20px]">
       <FontAwesomeIcon
         onClick={() => handleChangepage(-1)}
         icon={faAngleLeft}

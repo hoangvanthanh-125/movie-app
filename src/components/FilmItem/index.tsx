@@ -2,6 +2,8 @@ import React from "react";
 import "react-rater/lib/react-rater.css";
 import { useNavigate } from "react-router";
 import { ORIGIN_PATH } from "../../constants";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 interface Props {
   film: any;
   isTrending?: boolean;
@@ -10,12 +12,18 @@ function FilmItem({ film, isTrending }: Props) {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate(`/${film?.name ? 'tv' : 'movie'}/${film?.id}/${film?.name || film?.title}`)}
+      onClick={() =>
+        navigate(
+          `/${film?.name ? "tv" : "movie"}/${film?.id}/${
+            film?.name || film?.title
+          }`
+        )
+      }
       className={` mb-[15px] cursor-pointer md:hover:scale-110 transition-all group delay-1000 ${
         isTrending === true ? "flex" : ""
       }`}
     >
-      <img
+      <LazyLoadImage
         className={`${
           isTrending === true
             ? "w-[60px] h-auto mr-[20px]"
@@ -23,6 +31,7 @@ function FilmItem({ film, isTrending }: Props) {
         }  object-cover rounded-sm`}
         src={`${ORIGIN_PATH}${film.poster_path}`}
         alt=""
+        effect="blur"
       />
 
       <div>
