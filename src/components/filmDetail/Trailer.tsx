@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
-import { getTrailer } from "../../apis/filmApi";
 import { useAppDispatch } from "../../redux/hook";
 import { uiActions } from "../../redux/slice/uiSlice";
 import VideoTrailer from "./VideoTrailer";
@@ -88,7 +87,7 @@ function Trailer({ type, id,listTrailer }: Props) {
                 >
                   <svg
                     fill="#fff"
-                    className="w-[30px] h-[30px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden group-hover:block transition-all"
+                    className="w-[30px] h-[30px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  transition-all"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"
                   >

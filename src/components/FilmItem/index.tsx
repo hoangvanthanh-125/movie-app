@@ -33,6 +33,16 @@ function FilmItem({ film, isTrending }: Props) {
         alt=""
         effect="blur"
       />
+      {/* <img 
+      className={`${
+        isTrending === true
+          ? "w-[60px] h-auto mr-[20px]"
+          : "w-full h-[270px] "
+      }  object-cover rounded-sm`}
+      src={`${ORIGIN_PATH}${film.poster_path}`}
+      alt=""
+      loading="lazy"
+      /> */}
 
       <div>
         <p className="max-w-full w-full  max-h-[20px] overflow-hidden  transition-all group delay-500 mt-[3px] group-hover:text-indigo-700 text-indigo-500 mb-[3px]">

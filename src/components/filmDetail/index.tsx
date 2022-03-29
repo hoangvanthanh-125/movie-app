@@ -22,7 +22,7 @@ import ListSimilarFilm from "./ListSimilarFilm";
 import Trailer from "./Trailer";
 
 interface Props {
-  atWatchPage: boolean;
+  atWatchPage?: boolean;
 }
 function FilmDetail({ atWatchPage }: Props) {
   const { id, name, type } = useParams();
@@ -125,18 +125,22 @@ function FilmDetail({ atWatchPage }: Props) {
                   alt=""
                 />
               )}
-              <div
-                className="p-[4px] rounded-sm  text-mainTextColor  font-semibold text-[13px] border border-indigo-400 bg-indigo-500 hover:bg-indigo-700 transition-all w-[100px] flex justify-center items-center cursor-pointer mt-[10px] "
-                onClick={() =>
-                  navigate(`/watch/${type}/${id}/${name?.replaceAll(" ", "-")}`)
-                }
-              >
-                <FontAwesomeIcon
-                  icon={faPlay}
-                  className="text-[14px] mr-[5px]"
-                />
-                <span>Xem phim</span>
-              </div>{" "}
+              {!atWatchPage && (
+                <div
+                  className="p-[4px] rounded-sm  text-mainTextColor  font-semibold text-[13px] border border-indigo-400 bg-indigo-500 hover:bg-indigo-700 transition-all w-[100px] flex justify-center items-center cursor-pointer mt-[10px] "
+                  onClick={() =>
+                    navigate(
+                      `/watch/${type}/${id}/${name?.replaceAll(" ", "-")}`
+                    )
+                  }
+                >
+                  <FontAwesomeIcon
+                    icon={faPlay}
+                    className="text-[14px] mr-[5px]"
+                  />
+                  <span>Xem phim</span>
+                </div>
+              )}
               <p className="mt-[10px] text-center text-indigo-500">
                 {film?.vote_average} / {film?.vote_count} votes
               </p>
